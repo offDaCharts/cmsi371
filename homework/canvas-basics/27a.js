@@ -1,11 +1,11 @@
 (function () {
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d"),
-        current = {x: 256, y: 256},
         sideLength = 100,
         angle = Math.PI/6,
         scaleDiagonals = 0.75,
-        offset = {x: scaleDiagonals * Math.cos(angle), y: scaleDiagonals * Math.sin(angle)};
+        offset = {x: scaleDiagonals * Math.cos(angle), y: scaleDiagonals * Math.sin(angle)},
+        current = {x: 511 - offset.x * sideLength, y: 511};
         
     renderingContext.beginPath();
     renderingContext.moveTo(current.x, current.y);
