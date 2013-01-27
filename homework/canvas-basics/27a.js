@@ -4,7 +4,8 @@
         current = {x: 256, y: 256},
         sideLength = 100,
         angle = Math.PI/6,
-        offset = {x: 0.75 * Math.cos(angle), y: 0.75 * Math.sin(angle)};
+        scaleDiagonals = 0.75,
+        offset = {x: scaleDiagonals * Math.cos(angle), y: scaleDiagonals * Math.sin(angle)};
         
     renderingContext.beginPath();
     renderingContext.moveTo(current.x, current.y);
