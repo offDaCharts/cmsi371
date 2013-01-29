@@ -7,6 +7,7 @@
         offset = {x: scaleDiagonals * Math.cos(angle), y: scaleDiagonals * Math.sin(angle)},
         current = {x: 511 - offset.x * sideLength, y: 511};
         
+    //Draw grid frame    
     renderingContext.beginPath();
     renderingContext.moveTo(current.x, current.y);
     renderingContext.lineTo(current.x + offset.x * sideLength, current.y - offset.y * sideLength);
