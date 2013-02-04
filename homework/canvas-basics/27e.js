@@ -1,3 +1,5 @@
+// JD: Hope you had fun with this one---relived your JPL days
+//     a little bit? :)
 (function () {
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d"),

@@ -2,9 +2,12 @@
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d"),
         sideLength = 100,
+        // JD: Wow, now that's what I call precision :)
         angle = Math.PI/6,
         scaleDiagonals = 0.75,
         offset = {x: scaleDiagonals * Math.cos(angle), y: scaleDiagonals * Math.sin(angle)},
+        // JD: OK, if we are picking nits, note that you could also have
+        //     used canvas.width and canvas.height below.
         current = {x: 511 - offset.x * sideLength, y: 511};
         
     //Draw grid frame    

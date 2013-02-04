@@ -1,6 +1,13 @@
 (function () {
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d"),
+        // JD: I know it's more typing, but in the end, longer variables
+        //     read better (e.g., skyGradient, groundGradient, sunGradient---
+        //     note that I wouldn't mind dropping linear vs. radial from the
+        //     name because those can conceivably change.  For that matter,
+        //     you might even decide to use solid colors, in which case
+        //     skyFillStyle, groundFillStyle, and sunFillStyle might end
+        //     being the best names of all).
         linGradSky = renderingContext.createLinearGradient(256, -200, 256, 400),
         linGradGround = renderingContext.createLinearGradient(256, 100, 256, 700),
         radGradSun = renderingContext.createRadialGradient(246, 170, 1, 256, 190, 75);

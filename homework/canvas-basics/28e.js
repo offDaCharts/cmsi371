@@ -27,8 +27,12 @@
     //Pick random number of buildings
     var numBuild = Math.floor((Math.random()*5+2));
     var width = (512-(numBuild+1)*buildSpacing)/numBuild; 
-    
+    // JD:       ^^^canvas.width
+
     for(var i = 0; i < numBuild; i++) {
+        // JD: The expressions here are beginning to look somewhat
+        //     cramped; these are good candidates for more spacing
+        //     and breaks into multiple lines.
         var numLevel = Math.floor((Math.random()*5+2));;
         var numWindow = Math.floor((Math.random()*3+1));;
         renderingContext.fillStyle = "black";
