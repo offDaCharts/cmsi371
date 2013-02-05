@@ -33,8 +33,8 @@
         // JD: The expressions here are beginning to look somewhat
         //     cramped; these are good candidates for more spacing
         //     and breaks into multiple lines.
-        var numLevel = Math.floor((Math.random()*5+2));;
-        var numWindow = Math.floor((Math.random()*3+1));;
+        var numLevel = Math.floor((Math.random()*5+2));
+        var numWindow = Math.floor((Math.random()*3+1));
         renderingContext.fillStyle = "black";
         renderingContext.fillRect(buildSpacing*(i+1)+width*i, coordY-numLevel*levelHeight, width, numLevel*levelHeight);
         for(var j = 0; j < numLevel; j++) {
