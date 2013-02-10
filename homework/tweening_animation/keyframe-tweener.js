@@ -25,6 +25,18 @@ var KeyframeTweener = {
                 (distance / 2) * percentComplete * percentComplete + start :
                 (-distance / 2) * ((percentComplete - 1) * (percentComplete - 3) - 1) + start;
     },
+    
+    sineEaseOut: function (currentTime, start, distance, duration) {
+        var percentComplete = currentTime / duration;
+        return distance * Math.sin(percentComplete * Math.PI/2) + start;
+    },
+    
+    sineEaseIn: function (currentTime, start, distance, duration) {
+        var percentComplete = currentTime / duration;
+        return distance * (1 - Math.cos(percentComplete * Math.PI/2)) + start;
+    },
+    
+    
 
     // The big one: animation initialization.  The settings parameter
     // is expected to be a JavaScript object with the following
@@ -93,7 +105,7 @@ var KeyframeTweener = {
             //renderingContext.clearRect(0, 0, width, height);
             
             //Apply background
-            background(renderingContext);
+            //background(renderingContext);
 
             // For every sprite, go to the current pair of keyframes.
             // Then, draw the sprite based on the current frame.
@@ -113,6 +125,9 @@ var KeyframeTweener = {
                         // Set up our start and distance values, using defaults
                         // if necessary.
                         ease = startKeyframe.ease || KeyframeTweener.linear;
+                        easeX = startKeyframe.easeX || ease;
+                        easeY = startKeyframe.easeY || ease;
+                        
                         txStart = startKeyframe.tx || 0;
                         txDistance = (endKeyframe.tx || 0) - txStart;
                         tyStart = startKeyframe.ty || 0;
@@ -128,8 +143,8 @@ var KeyframeTweener = {
 
                         // Build our transform according to where we should be.
                         renderingContext.translate(
-                            ease(currentTweenFrame, txStart, txDistance, duration),
-                            ease(currentTweenFrame, tyStart, tyDistance, duration)
+                            easeX(currentTweenFrame, txStart, txDistance, duration),
+                            easeY(currentTweenFrame, tyStart, tyDistance, duration)
                         );
                         renderingContext.scale(
                             ease(currentTweenFrame, sxStart, sxDistance, duration),

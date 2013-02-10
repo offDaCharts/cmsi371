@@ -28,41 +28,56 @@
         
         wireCube = [function (renderingContext) {
             var canvas = document.getElementById("canvas"),
-        renderingContext = canvas.getContext("2d"),
-        sideLength = 100,
-        // JD: Wow, now that's what I call precision :)
-        angle = Math.PI/6,
-        scaleDiagonals = 0.75,
-        offset = {x: scaleDiagonals * Math.cos(angle), y: scaleDiagonals * Math.sin(angle)},
-        // JD: OK, if we are picking nits, note that you could also have
-        //     used canvas.width and canvas.height below.
-        current = {x: 0, y: 0};
-        
-    //Draw grid frame    
-    renderingContext.beginPath();
-    renderingContext.moveTo(current.x, current.y);
-    renderingContext.lineTo(current.x + offset.x * sideLength, current.y - offset.y * sideLength);
-    renderingContext.lineTo(current.x + offset.x * sideLength, current.y - (offset.y + 1) * sideLength);
-    renderingContext.moveTo(current.x, current.y);
-    renderingContext.lineTo(current.x, current.y -= sideLength);
-    renderingContext.lineTo(current.x + offset.x * sideLength, current.y - offset.y * sideLength);
-    renderingContext.lineTo(current.x + (offset.x - 1) * sideLength, current.y - offset.y * sideLength);
-    renderingContext.moveTo(current.x, current.y);
-    renderingContext.lineTo(current.x -= sideLength, current.y);
-    renderingContext.lineTo(current.x + offset.x * sideLength, current.y - offset.y * sideLength);
-    renderingContext.lineTo(current.x + offset.x * sideLength, current.y - (offset.y - 1) * sideLength);
-    renderingContext.moveTo(current.x, current.y);
-    renderingContext.lineTo(current.x, current.y += sideLength);
-    renderingContext.lineTo(current.x + offset.x * sideLength, current.y - offset.y * sideLength);
-    renderingContext.lineTo(current.x + (offset.x + 1) * sideLength, current.y - offset.y * sideLength);
-    renderingContext.moveTo(current.x, current.y);
-    renderingContext.lineTo(current.x += sideLength, current.y);
+            renderingContext = canvas.getContext("2d"),
+            sideLength = 100,
+            // JD: Wow, now that's what I call precision :)
+            angle = Math.PI/6,
+            scaleDiagonals = 0.75,
+            offset = {x: scaleDiagonals * Math.cos(angle), y: scaleDiagonals * Math.sin(angle)},
+            // JD: OK, if we are picking nits, note that you could also have
+            //     used canvas.width and canvas.height below.
+            current = {x: 0, y: 0};
+            
+            //Draw grid frame    
+            renderingContext.beginPath();
+            renderingContext.moveTo(current.x, current.y);
+            renderingContext.lineTo(current.x + offset.x * sideLength, current.y - offset.y * sideLength);
+            renderingContext.lineTo(current.x + offset.x * sideLength, current.y - (offset.y + 1) * sideLength);
+            renderingContext.moveTo(current.x, current.y);
+            renderingContext.lineTo(current.x, current.y -= sideLength);
+            renderingContext.lineTo(current.x + offset.x * sideLength, current.y - offset.y * sideLength);
+            renderingContext.lineTo(current.x + (offset.x - 1) * sideLength, current.y - offset.y * sideLength);
+            renderingContext.moveTo(current.x, current.y);
+            renderingContext.lineTo(current.x -= sideLength, current.y);
+            renderingContext.lineTo(current.x + offset.x * sideLength, current.y - offset.y * sideLength);
+            renderingContext.lineTo(current.x + offset.x * sideLength, current.y - (offset.y - 1) * sideLength);
+            renderingContext.moveTo(current.x, current.y);
+            renderingContext.lineTo(current.x, current.y += sideLength);
+            renderingContext.lineTo(current.x + offset.x * sideLength, current.y - offset.y * sideLength);
+            renderingContext.lineTo(current.x + (offset.x + 1) * sideLength, current.y - offset.y * sideLength);
+            renderingContext.moveTo(current.x, current.y);
+            renderingContext.lineTo(current.x += sideLength, current.y);
 
-    
-    renderingContext.lineWidth = 1;
-    renderingContext.strokeStyle = "green";
-    renderingContext.stroke();
+        
+            renderingContext.lineWidth = 1;
+            renderingContext.strokeStyle = "green";
+            renderingContext.stroke();
         }],
+        
+        planet = [
+            function (renderingContext) {
+                renderingContext.strokeStyle = "blue";
+                renderingContext.beginPath();
+                renderingContext.arc(0, 0, 50, 0, Math.PI * 2);
+                renderingContext.stroke();
+            }, 
+            function (renderingContext) {
+                renderingContext.strokeStyle = "red";
+                renderingContext.beginPath();
+                renderingContext.arc(0, 0, 50, 0, Math.PI * 2);
+                renderingContext.stroke();
+            }
+        ],
         
         background = function(renderingContext) {
             renderingContext.fillStyle = "black";
@@ -168,6 +183,51 @@
                         sx: 0.5,
                         sy: 0.5,
                         rotate: 30
+                    }
+                ]
+            },
+            
+            {
+                draw: planet,
+                numberOfPositions: 2,
+                nextPosition: 0,
+                keyframes: [
+                    {
+                        frame: 10,
+                        tx: 700,
+                        ty: 500,
+                        easeX: KeyframeTweener.sineEaseIn,
+                        easeY: KeyframeTweener.sineEaseOut
+                    },
+
+                    {
+                        frame: 60,
+                        tx: 500,
+                        ty: 700,
+                        easeX: KeyframeTweener.sineEaseOut,
+                        easeY: KeyframeTweener.sineEaseIn
+                    },
+
+                    {
+                        frame: 110,
+                        tx: 300,
+                        ty: 500,
+                        easeX: KeyframeTweener.sineEaseIn,
+                        easeY: KeyframeTweener.sineEaseOut
+                    },
+
+                    {
+                        frame: 160,
+                        tx: 500,
+                        ty: 300,
+                        easeX: KeyframeTweener.sineEaseOut,
+                        easeY: KeyframeTweener.sineEaseIn
+                    },
+
+                    {
+                        frame: 210,
+                        tx: 700,
+                        ty: 500
                     }
                 ]
             }
