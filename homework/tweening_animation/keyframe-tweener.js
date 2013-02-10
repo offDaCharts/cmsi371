@@ -140,7 +140,10 @@ var KeyframeTweener = {
                         );
 
                         // Draw the sprite.
-                        sprites[i].draw(renderingContext);
+                        sprites[i].draw[sprites[i].nextPosition](renderingContext);
+                        //Update next postion state
+                        sprites[i].nextPosition = 
+                            (sprites[i].nextPosition + 1) % sprites[i].numberOfPositions;
 
                         // Clean up.
                         renderingContext.restore();

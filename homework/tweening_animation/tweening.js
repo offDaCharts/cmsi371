@@ -9,19 +9,24 @@
         // First, a selection of "drawing functions" from which we
         // can choose.  Their common trait: they all accept a single
         // renderingContext argument.
-        square = function (renderingContext) {
-            renderingContext.fillStyle = "blue";
-            renderingContext.fillRect(-20, -20, 40, 40);
-        },
+        square = [
+            function (renderingContext) {
+                renderingContext.fillStyle = "blue";
+                renderingContext.fillRect(-20, -20, 40, 40);
+            },
+            function (renderingContext) {
+                renderingContext.fillStyle = "red";
+                renderingContext.fillRect(-20, -20, 40, 40);
+            }],
 
-        circle = function (renderingContext) {
+        circle = [function (renderingContext) {
             renderingContext.strokeStyle = "red";
             renderingContext.beginPath();
             renderingContext.arc(0, 0, 50, 0, Math.PI * 2);
             renderingContext.stroke();
-        },
+        }],
         
-        wireCube = function (renderingContext) {
+        wireCube = [function (renderingContext) {
             var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d"),
         sideLength = 100,
@@ -57,7 +62,7 @@
     renderingContext.lineWidth = 1;
     renderingContext.strokeStyle = "green";
     renderingContext.stroke();
-        },
+        }],
         
         background = function(renderingContext) {
             renderingContext.fillStyle = "black";
@@ -72,6 +77,8 @@
         sprites = [
             {
                 draw: square,
+                numberOfPositions: 2,
+                nextPosition: 0,
                 keyframes: [
                     {
                         frame: 0,
@@ -99,6 +106,8 @@
 
             {
                 draw: circle,
+                numberOfPositions: 1,
+                nextPosition: 0,
                 keyframes: [
                     {
                         frame: 50,
@@ -130,6 +139,8 @@
             
             {
                 draw: wireCube,
+                numberOfPositions: 1,
+                nextPosition: 0,
                 keyframes: [
                     {
                         frame: 10,
