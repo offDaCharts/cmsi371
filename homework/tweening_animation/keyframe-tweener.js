@@ -64,7 +64,8 @@ var KeyframeTweener = {
             renderingContext = settings.renderingContext,
             width = settings.width,
             height = settings.height,
-            sprites = settings.sprites;
+            sprites = settings.sprites,
+            background = settings.backgroundFunction;
 
         setInterval(function () {
             // Some reusable loop variables.
@@ -89,7 +90,10 @@ var KeyframeTweener = {
                 duration;
 
             // Clear the canvas.
-            renderingContext.clearRect(0, 0, width, height);
+            //renderingContext.clearRect(0, 0, width, height);
+            
+            //Apply background
+            background(renderingContext);
 
             // For every sprite, go to the current pair of keyframes.
             // Then, draw the sprite based on the current frame.

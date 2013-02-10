@@ -2,6 +2,7 @@
  * This file demonstrates how our homebrew keyframe-tweening
  * engine is used.
  */
+ 
 (function () {
     var canvas = document.getElementById("canvas"),
 
@@ -20,7 +21,7 @@
             renderingContext.stroke();
         },
         
-        somethingElse = function (renderingContext) {
+        wireCube = function (renderingContext) {
             var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d"),
         sideLength = 100,
@@ -56,6 +57,11 @@
     renderingContext.lineWidth = 1;
     renderingContext.strokeStyle = "green";
     renderingContext.stroke();
+        },
+        
+        background = function(renderingContext) {
+            renderingContext.fillStyle = "black";
+            renderingContext.fillRect(0, 0, canvas.width, canvas.height);
         },
 
         // Then, we have "easing functions" that determine how
@@ -123,7 +129,7 @@
             },
             
             {
-                draw: somethingElse,
+                draw: wireCube,
                 keyframes: [
                     {
                         frame: 10,
@@ -163,6 +169,7 @@
         renderingContext: canvas.getContext("2d"),
         width: canvas.width,
         height: canvas.height,
-        sprites: sprites
+        sprites: sprites,
+        backgroundFunction: background
     });
 }());
