@@ -3,9 +3,13 @@
 (function () {
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d"),
-        radialGradientPlanet = renderingContext.createRadialGradient(210, 160, 1, 230, 180, 320),
-        radialGradientRing = renderingContext.createRadialGradient(210, 160, 1, 230, 180, 320),
         circleCenter = {x: 306, y: 256},
+        radialGradientPlanet = renderingContext.createRadialGradient(
+            circleCenter.x - 96, circleCenter.y - 96, 1, circleCenter.x - 76, circleCenter.y - 76, 320
+        ),
+        radialGradientRing = renderingContext.createRadialGradient(
+            circleCenter.x - 96, circleCenter.y - 96, 1, circleCenter.x - 76, circleCenter.y - 76, 320
+        ),
         circleRadius = 200,
         ringStartOffset = {x: 256, y: 0},
         controlPointOffset = {x: 256, y: 50};
@@ -19,8 +23,14 @@
     //Draw back half of ring
     renderingContext.beginPath();
     renderingContext.moveTo(circleCenter.x + ringStartOffset.x, circleCenter.y - ringStartOffset.y);
-    renderingContext.quadraticCurveTo(circleCenter.x + controlPointOffset.x, circleCenter.y - controlPointOffset.y, circleCenter.y, circleCenter.y - controlPointOffset.y);
-    renderingContext.quadraticCurveTo(circleCenter.x - controlPointOffset.x, circleCenter.y - controlPointOffset.y, circleCenter.x - ringStartOffset.x, circleCenter.y - ringStartOffset.y);
+    renderingContext.quadraticCurveTo(
+        circleCenter.x + controlPointOffset.x, circleCenter.y - controlPointOffset.y,
+        circleCenter.y, circleCenter.y - controlPointOffset.y
+    );
+    renderingContext.quadraticCurveTo(
+        circleCenter.x - controlPointOffset.x, circleCenter.y - controlPointOffset.y,
+        circleCenter.x - ringStartOffset.x, circleCenter.y - ringStartOffset.y
+    );
 
     
     renderingContext.lineWidth = 25;
@@ -36,8 +46,14 @@
     //Draw front half of ring
     renderingContext.beginPath();
     renderingContext.moveTo(circleCenter.x + ringStartOffset.x, circleCenter.y - ringStartOffset.y);
-    renderingContext.quadraticCurveTo(circleCenter.x + controlPointOffset.x, circleCenter.y + controlPointOffset.y, circleCenter.y, circleCenter.y + controlPointOffset.y);
-    renderingContext.quadraticCurveTo(circleCenter.x - controlPointOffset.x, circleCenter.y + controlPointOffset.y, circleCenter.x - ringStartOffset.x, circleCenter.y - ringStartOffset.y);
+    renderingContext.quadraticCurveTo(
+        circleCenter.x + controlPointOffset.x, circleCenter.y + controlPointOffset.y,
+        circleCenter.y, circleCenter.y + controlPointOffset.y
+    );
+    renderingContext.quadraticCurveTo(
+        circleCenter.x - controlPointOffset.x, circleCenter.y + controlPointOffset.y,
+        circleCenter.x - ringStartOffset.x, circleCenter.y - ringStartOffset.y
+    );
     
     
     renderingContext.strokeStyle = radialGradientRing;

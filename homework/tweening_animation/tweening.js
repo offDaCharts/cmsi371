@@ -5,85 +5,10 @@
  
 (function () {
     var canvas = document.getElementById("canvas"),
-
-        // First, a selection of "drawing functions" from which we
-        // can choose.  Their common trait: they all accept a single
-        // renderingContext argument.
-        square = [
-            function (renderingContext) {
-                renderingContext.fillStyle = "blue";
-                renderingContext.fillRect(-20, -20, 40, 40);
-            },
-            function (renderingContext) {
-                renderingContext.fillStyle = "red";
-                renderingContext.fillRect(-20, -20, 40, 40);
-            }],
-
-        circle = [function (renderingContext) {
-            renderingContext.strokeStyle = "red";
-            renderingContext.beginPath();
-            renderingContext.arc(0, 0, 50, 0, Math.PI * 2);
-            renderingContext.stroke();
-        }],
+    
+        //First, get library of drawing functions:
+        drawLib = getDrawLibrary(),
         
-        wireCube = [function (renderingContext) {
-            var canvas = document.getElementById("canvas"),
-            renderingContext = canvas.getContext("2d"),
-            sideLength = 100,
-            // JD: Wow, now that's what I call precision :)
-            angle = Math.PI/6,
-            scaleDiagonals = 0.75,
-            offset = {x: scaleDiagonals * Math.cos(angle), y: scaleDiagonals * Math.sin(angle)},
-            // JD: OK, if we are picking nits, note that you could also have
-            //     used canvas.width and canvas.height below.
-            current = {x: 0, y: 0};
-            
-            //Draw grid frame    
-            renderingContext.beginPath();
-            renderingContext.moveTo(current.x, current.y);
-            renderingContext.lineTo(current.x + offset.x * sideLength, current.y - offset.y * sideLength);
-            renderingContext.lineTo(current.x + offset.x * sideLength, current.y - (offset.y + 1) * sideLength);
-            renderingContext.moveTo(current.x, current.y);
-            renderingContext.lineTo(current.x, current.y -= sideLength);
-            renderingContext.lineTo(current.x + offset.x * sideLength, current.y - offset.y * sideLength);
-            renderingContext.lineTo(current.x + (offset.x - 1) * sideLength, current.y - offset.y * sideLength);
-            renderingContext.moveTo(current.x, current.y);
-            renderingContext.lineTo(current.x -= sideLength, current.y);
-            renderingContext.lineTo(current.x + offset.x * sideLength, current.y - offset.y * sideLength);
-            renderingContext.lineTo(current.x + offset.x * sideLength, current.y - (offset.y - 1) * sideLength);
-            renderingContext.moveTo(current.x, current.y);
-            renderingContext.lineTo(current.x, current.y += sideLength);
-            renderingContext.lineTo(current.x + offset.x * sideLength, current.y - offset.y * sideLength);
-            renderingContext.lineTo(current.x + (offset.x + 1) * sideLength, current.y - offset.y * sideLength);
-            renderingContext.moveTo(current.x, current.y);
-            renderingContext.lineTo(current.x += sideLength, current.y);
-
-        
-            renderingContext.lineWidth = 1;
-            renderingContext.strokeStyle = "green";
-            renderingContext.stroke();
-        }],
-        
-        planet = [
-            function (renderingContext) {
-                renderingContext.strokeStyle = "blue";
-                renderingContext.beginPath();
-                renderingContext.arc(0, 0, 50, 0, Math.PI * 2);
-                renderingContext.stroke();
-            }, 
-            function (renderingContext) {
-                renderingContext.strokeStyle = "red";
-                renderingContext.beginPath();
-                renderingContext.arc(0, 0, 50, 0, Math.PI * 2);
-                renderingContext.stroke();
-            }
-        ],
-        
-        background = function(renderingContext) {
-            renderingContext.fillStyle = "black";
-            renderingContext.fillRect(0, 0, canvas.width, canvas.height);
-        },
-
         // Then, we have "easing functions" that determine how
         // intermediate frames are computed.
 
@@ -91,7 +16,7 @@
         // has a drawing function and an array of keyframes.
         sprites = [
             {
-                draw: square,
+                draw: drawLib.square,
                 numberOfPositions: 2,
                 nextPosition: 0,
                 keyframes: [
@@ -120,7 +45,7 @@
             },
 
             {
-                draw: circle,
+                draw: drawLib.circle,
                 numberOfPositions: 1,
                 nextPosition: 0,
                 keyframes: [
@@ -153,7 +78,7 @@
             },
             
             {
-                draw: wireCube,
+                draw: drawLib.wireCube,
                 numberOfPositions: 1,
                 nextPosition: 0,
                 keyframes: [
@@ -188,7 +113,7 @@
             },
             
             {
-                draw: planet,
+                draw: drawLib.planet,
                 numberOfPositions: 2,
                 nextPosition: 0,
                 keyframes: [
@@ -230,6 +155,61 @@
                         ty: 500
                     }
                 ]
+            },
+            
+            {
+                draw: drawLib.planetWithRing,
+                numberOfPositions: 1,
+                nextPosition: 0,
+                keyframes: [
+                    {
+                        frame: 10,
+                        tx: 400,
+                        ty: 300,
+                        sx: 0.3,
+                        sy: 0.3,
+                        easeX: KeyframeTweener.sineEaseIn,
+                        easeY: KeyframeTweener.sineEaseOut
+                    },
+
+                    {
+                        frame: 60,
+                        tx: 300,
+                        ty: 400,
+                        sx: 0.3,
+                        sy: 0.3,
+                        easeX: KeyframeTweener.sineEaseOut,
+                        easeY: KeyframeTweener.sineEaseIn
+                    },
+
+                    {
+                        frame: 110,
+                        tx: 200,
+                        ty: 300,
+                        sx: 0.3,
+                        sy: 0.3,
+                        easeX: KeyframeTweener.sineEaseIn,
+                        easeY: KeyframeTweener.sineEaseOut
+                    },
+
+                    {
+                        frame: 160,
+                        tx: 300,
+                        ty: 200,
+                        sx: 0.3,
+                        sy: 0.3,
+                        easeX: KeyframeTweener.sineEaseOut,
+                        easeY: KeyframeTweener.sineEaseIn
+                    },
+
+                    {
+                        frame: 210,
+                        tx: 400,
+                        ty: 300,
+                        sx: 0.3,
+                        sy: 0.3
+                    }
+                ]
             }
         ];
 
@@ -241,6 +221,6 @@
         width: canvas.width,
         height: canvas.height,
         sprites: sprites,
-        backgroundFunction: background
+        backgroundFunction: drawLib.background
     });
 }());
