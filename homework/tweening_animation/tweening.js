@@ -6,6 +6,12 @@
 (function () {
     var canvas = document.getElementById("canvas"),
     
+        // Variables for animation scene references
+        bigBangFrameStart = 200,
+        sunPos = {x: 400, y: 400},
+        planetRadius = 300,
+        planetWithRingRadius = 150,
+    
         //First, get library of drawing functions:
         drawLib = getDrawLibrary(),
         
@@ -16,198 +22,106 @@
         // has a drawing function and an array of keyframes.
         sprites = [
             {
-                draw: drawLib.square,
-                numberOfPositions: 2,
-                nextPosition: 0,
-                keyframes: [
-                    {
-                        frame: 0,
-                        tx: 20,
-                        ty: 20,
-                        ease: KeyframeTweener.linear
-                    },
-
-                    {
-                        frame: 30,
-                        tx: 100,
-                        ty: 50,
-                        ease: KeyframeTweener.quadEaseInOut
-                    },
-
-                    // The last keyframe does not need an easing function.
-                    {
-                        frame: 80,
-                        tx: 80,
-                        ty: 500,
-                        rotate: 60 // Keyframe.rotate uses degrees.
-                    }
-                ]
-            },
-
-            {
-                draw: drawLib.circle,
-                numberOfPositions: 1,
-                nextPosition: 0,
-                keyframes: [
-                    {
-                        frame: 50,
-                        tx: 300,
-                        ty: 600,
-                        sx: 0.5,
-                        sy: 0.5,
-                        ease: KeyframeTweener.quadEaseOut
-                    },
-
-                    {
-                        frame: 100,
-                        tx: 300,
-                        ty: 0,
-                        sx: 3,
-                        sy: 0.25,
-                        ease: KeyframeTweener.quadEaseOut
-                    },
-
-                    {
-                        frame: 150,
-                        tx: 300,
-                        ty: 600,
-                        sx: 0.5,
-                        sy: 0.5
-                    }
-                ]
-            },
-            
-            {
-                draw: drawLib.wireCube,
-                numberOfPositions: 1,
-                nextPosition: 0,
-                keyframes: [
-                    {
-                        frame: 10,
-                        tx: 200,
-                        ty: 100,
-                        sx: 0.5,
-                        sy: 0.5,
-                        ease: KeyframeTweener.quadEaseOut
-                    },
-
-                    {
-                        frame: 100,
-                        tx: 300,
-                        ty: 50,
-                        sx: 3,
-                        sy: 0.25,
-                        ease: KeyframeTweener.quadEaseOut,
-                        rotate: 120
-                    },
-
-                    {
-                        frame: 150,
-                        tx: 10,
-                        ty: 200,
-                        sx: 0.5,
-                        sy: 0.5,
-                        rotate: 30
-                    }
-                ]
-            },
-            
-            {
                 draw: drawLib.planet,
                 numberOfPositions: 2,
                 nextPosition: 0,
                 keyframes: [
                     {
                         frame: 0,
-                        tx: 700,
-                        ty: 500,
+                        tx: sunPos.x + planetRadius,
+                        ty: sunPos.y,
                         easeX: KeyframeTweener.sineEaseIn,
                         easeY: KeyframeTweener.sineEaseOut
                     },
 
                     {
                         frame: 50,
-                        tx: 500,
-                        ty: 700,
+                        tx: sunPos.x,
+                        ty: sunPos.y + planetRadius,
                         easeX: KeyframeTweener.sineEaseOut,
                         easeY: KeyframeTweener.sineEaseIn
                     },
 
                     {
                         frame: 100,
-                        tx: 300,
-                        ty: 500,
+                        tx: sunPos.x - planetRadius,
+                        ty: sunPos.y,
                         easeX: KeyframeTweener.sineEaseIn,
                         easeY: KeyframeTweener.sineEaseOut
                     },
 
                     {
                         frame: 150,
-                        tx: 500,
-                        ty: 300,
+                        tx: sunPos.x,
+                        ty: sunPos.y - planetRadius,
                         easeX: KeyframeTweener.sineEaseOut,
                         easeY: KeyframeTweener.sineEaseIn
                     },
 
                     {
                         frame: 200,
-                        tx: 700,
-                        ty: 500
+                        tx: sunPos.x + planetRadius,
+                        ty: sunPos.y
                     }
                 ]
             },
             
             {
                 draw: drawLib.planetWithRing,
-                numberOfPositions: 1,
+                numberOfPositions: 2,
                 nextPosition: 0,
                 keyframes: [
                     {
                         frame: 0,
-                        tx: 500,
-                        ty: 300,
+                        tx: sunPos.x + planetWithRingRadius,
+                        ty: sunPos.y,
                         sx: 0.2,
                         sy: 0.2,
                         easeX: KeyframeTweener.sineEaseIn,
-                        easeY: KeyframeTweener.sineEaseOut
+                        easeY: KeyframeTweener.sineEaseOut,
+                        rotate: 0
                     },
 
                     {
                         frame: 50,
-                        tx: 300,
-                        ty: 500,
+                        tx: sunPos.x,
+                        ty: sunPos.y - planetWithRingRadius,
                         sx: 0.2,
                         sy: 0.2,
                         easeX: KeyframeTweener.sineEaseOut,
-                        easeY: KeyframeTweener.sineEaseIn
+                        easeY: KeyframeTweener.sineEaseIn,
+                        rotate: 180
                     },
 
                     {
                         frame: 100,
-                        tx: 100,
-                        ty: 300,
+                        tx: sunPos.x - planetWithRingRadius,
+                        ty: sunPos.y,
                         sx: 0.2,
                         sy: 0.2,
                         easeX: KeyframeTweener.sineEaseIn,
-                        easeY: KeyframeTweener.sineEaseOut
+                        easeY: KeyframeTweener.sineEaseOut,
+                        rotate: 360
                     },
 
                     {
                         frame: 150,
-                        tx: 300,
-                        ty: 100,
+                        tx: sunPos.x,
+                        ty: sunPos.y + planetWithRingRadius,
                         sx: 0.2,
                         sy: 0.2,
                         easeX: KeyframeTweener.sineEaseOut,
-                        easeY: KeyframeTweener.sineEaseIn
+                        easeY: KeyframeTweener.sineEaseIn,
+                        rotate: 540
                     },
 
                     {
                         frame: 200,
-                        tx: 500,
-                        ty: 300,
+                        tx: sunPos.x + planetWithRingRadius,
+                        ty: sunPos.y,
                         sx: 0.2,
-                        sy: 0.2
+                        sy: 0.2,
+                        rotate: 720
                     }
                 ]
             },
@@ -223,16 +137,16 @@
                 keyframes: [
                     {
                         frame: 0,
-                        tx: 300,
-                        ty: 300,
+                        tx: sunPos.x,
+                        ty: sunPos.y,
                         sx: 0.3,
                         sy: 0.3
                     },
 
                     {
                         frame: 200,
-                        tx: 300,
-                        ty: 300,
+                        tx: sunPos.x,
+                        ty: sunPos.y,
                         sx: 0.3,
                         sy: 0.3
                     }

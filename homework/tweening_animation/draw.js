@@ -87,64 +87,125 @@ var getDrawLibrary = function() {
             }
         ],
         
-        planetWithRing: [function (renderingContext) {
-            var circleCenter = {x: 0, y: 0},
-                radialGradientPlanet = renderingContext.createRadialGradient(
-                    circleCenter.x - 96, circleCenter.y - 96, 1, circleCenter.x - 76, circleCenter.y - 76, 320
-                ),
-                radialGradientRing = renderingContext.createRadialGradient(
-                    circleCenter.x - 96, circleCenter.y - 96, 1, circleCenter.x - 76, circleCenter.y - 76, 320
-                ),
-                circleRadius = 200,
-                ringStartOffset = {x: 256, y: 0},
-                controlPointOffset = {x: 256, y: 50};
-            
-            radialGradientPlanet.addColorStop(0, "white");
-            radialGradientPlanet.addColorStop(1, "blue");
-            radialGradientRing.addColorStop(0, "white");
-            radialGradientRing.addColorStop(1, "red");
+        planetWithRing: [
+            function (renderingContext) {
+                var circleCenter = {x: 0, y: 0},
+                    radialGradientPlanet = renderingContext.createRadialGradient(
+                        circleCenter.x - 96, circleCenter.y - 96, 1, circleCenter.x - 76, circleCenter.y - 76, 320
+                    ),
+                    radialGradientRing = renderingContext.createRadialGradient(
+                        circleCenter.x - 96, circleCenter.y - 96, 1, circleCenter.x - 76, circleCenter.y - 76, 320
+                    ),
+                    circleRadius = 200,
+                    ringStartOffset = {x: 256, y: 0},
+                    controlPointOffset = {x: 256, y: 50};
+                
+                radialGradientPlanet.addColorStop(0, "white");
+                radialGradientPlanet.addColorStop(1, "blue");
+                radialGradientRing.addColorStop(0, "white");
+                radialGradientRing.addColorStop(1, "red");
 
-            
-            //Draw back half of ring
-            renderingContext.beginPath();
-            renderingContext.moveTo(circleCenter.x + ringStartOffset.x, circleCenter.y - ringStartOffset.y);
-            renderingContext.quadraticCurveTo(
-                circleCenter.x + controlPointOffset.x, circleCenter.y - controlPointOffset.y,
-                circleCenter.y, circleCenter.y - controlPointOffset.y
-            );
-            renderingContext.quadraticCurveTo(
-                circleCenter.x - controlPointOffset.x, circleCenter.y - controlPointOffset.y,
-                circleCenter.x - ringStartOffset.x, circleCenter.y - ringStartOffset.y
-            );
+                
+                //Draw back half of ring
+                renderingContext.beginPath();
+                renderingContext.moveTo(circleCenter.x + ringStartOffset.x, circleCenter.y - ringStartOffset.y);
+                renderingContext.quadraticCurveTo(
+                    circleCenter.x + controlPointOffset.x, circleCenter.y - controlPointOffset.y,
+                    circleCenter.y, circleCenter.y - controlPointOffset.y
+                );
+                renderingContext.quadraticCurveTo(
+                    circleCenter.x - controlPointOffset.x, circleCenter.y - controlPointOffset.y,
+                    circleCenter.x - ringStartOffset.x, circleCenter.y - ringStartOffset.y
+                );
 
-            
-            renderingContext.lineWidth = 25;
-            renderingContext.strokeStyle = radialGradientRing;
-            renderingContext.stroke();
+                
+                renderingContext.lineWidth = 25;
+                renderingContext.strokeStyle = radialGradientRing;
+                renderingContext.stroke();
 
-            //Draw planet
-            renderingContext.fillStyle = radialGradientPlanet;
-            renderingContext.beginPath();
-            renderingContext.arc(circleCenter.x, circleCenter.y, circleRadius, 0, Math.PI * 2, true);
-            renderingContext.fill();
-            
-            //Draw front half of ring
-            renderingContext.beginPath();
-            renderingContext.moveTo(circleCenter.x + ringStartOffset.x, circleCenter.y - ringStartOffset.y);
-            renderingContext.quadraticCurveTo(
-                circleCenter.x + controlPointOffset.x, circleCenter.y + controlPointOffset.y,
-                circleCenter.y, circleCenter.y + controlPointOffset.y
-            );
-            renderingContext.quadraticCurveTo(
-                circleCenter.x - controlPointOffset.x, circleCenter.y + controlPointOffset.y,
-                circleCenter.x - ringStartOffset.x, circleCenter.y - ringStartOffset.y
-            );
-            
-            
-            renderingContext.strokeStyle = radialGradientRing;
-            renderingContext.stroke();
+                //Draw planet
+                renderingContext.fillStyle = radialGradientPlanet;
+                renderingContext.beginPath();
+                renderingContext.arc(circleCenter.x, circleCenter.y, circleRadius, 0, Math.PI * 2, true);
+                renderingContext.fill();
+                
+                //Draw front half of ring
+                renderingContext.beginPath();
+                renderingContext.moveTo(circleCenter.x + ringStartOffset.x, circleCenter.y - ringStartOffset.y);
+                renderingContext.quadraticCurveTo(
+                    circleCenter.x + controlPointOffset.x, circleCenter.y + controlPointOffset.y,
+                    circleCenter.y, circleCenter.y + controlPointOffset.y
+                );
+                renderingContext.quadraticCurveTo(
+                    circleCenter.x - controlPointOffset.x, circleCenter.y + controlPointOffset.y,
+                    circleCenter.x - ringStartOffset.x, circleCenter.y - ringStartOffset.y
+                );
+                
+                
+                renderingContext.strokeStyle = radialGradientRing;
+                renderingContext.stroke();
 
-        }],
+            },
+            function (renderingContext) {
+                var circleCenter = {x: 0, y: 0},
+                    radialGradientPlanet = renderingContext.createRadialGradient(
+                        circleCenter.x - 96, circleCenter.y - 96, 1, circleCenter.x - 76, circleCenter.y - 76, 320
+                    ),
+                    radialGradientRing = renderingContext.createRadialGradient(
+                        circleCenter.x - 96, circleCenter.y - 96, 1, circleCenter.x - 76, circleCenter.y - 76, 320
+                    ),
+                    circleRadius = 200,
+                    ringStartOffset = {x: 256, y: 0},
+                    controlPointOffset = {x: 256, y: 50};
+                
+                radialGradientPlanet.addColorStop(0, "white");
+                radialGradientPlanet.addColorStop(1, "green");
+                radialGradientRing.addColorStop(0, "white");
+                radialGradientRing.addColorStop(1, "red");
+
+                
+                //Draw back half of ring
+                renderingContext.beginPath();
+                renderingContext.moveTo(circleCenter.x + ringStartOffset.x, circleCenter.y - ringStartOffset.y);
+                renderingContext.quadraticCurveTo(
+                    circleCenter.x + controlPointOffset.x, circleCenter.y - controlPointOffset.y,
+                    circleCenter.y, circleCenter.y - controlPointOffset.y
+                );
+                renderingContext.quadraticCurveTo(
+                    circleCenter.x - controlPointOffset.x, circleCenter.y - controlPointOffset.y,
+                    circleCenter.x - ringStartOffset.x, circleCenter.y - ringStartOffset.y
+                );
+
+                
+                renderingContext.lineWidth = 25;
+                renderingContext.strokeStyle = radialGradientRing;
+                renderingContext.stroke();
+
+                //Draw planet
+                renderingContext.fillStyle = radialGradientPlanet;
+                renderingContext.beginPath();
+                renderingContext.arc(circleCenter.x, circleCenter.y, circleRadius, 0, Math.PI * 2, true);
+                renderingContext.fill();
+                
+                //Draw front half of ring
+                renderingContext.beginPath();
+                renderingContext.moveTo(circleCenter.x + ringStartOffset.x, circleCenter.y - ringStartOffset.y);
+                renderingContext.quadraticCurveTo(
+                    circleCenter.x + controlPointOffset.x, circleCenter.y + controlPointOffset.y,
+                    circleCenter.y, circleCenter.y + controlPointOffset.y
+                );
+                renderingContext.quadraticCurveTo(
+                    circleCenter.x - controlPointOffset.x, circleCenter.y + controlPointOffset.y,
+                    circleCenter.x - ringStartOffset.x, circleCenter.y - ringStartOffset.y
+                );
+                
+                
+                renderingContext.strokeStyle = radialGradientRing;
+                renderingContext.stroke();
+
+            }
+            
+        ],
         
         sun: [
             function (renderingContext) {

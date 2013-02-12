@@ -101,6 +101,7 @@ var KeyframeTweener = {
                 currentTweenFrame,
                 duration;
 
+
             // Clear the canvas.
             //renderingContext.clearRect(0, 0, width, height);
             
@@ -173,7 +174,7 @@ var KeyframeTweener = {
             }
 
             // Move to the next frame.
-            currentFrame = (currentFrame + 1) % 200;
+            currentFrame = (currentFrame + 1) % 201;
         }, 1000 / (settings.frameRate || 24));
     }
 };
