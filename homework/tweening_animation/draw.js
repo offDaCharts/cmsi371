@@ -21,9 +21,7 @@ var getDrawLibrary = function() {
         }],
         
         wireCube: [function (renderingContext) {
-            var canvas = document.getElementById("canvas"),
-            renderingContext = canvas.getContext("2d"),
-            sideLength = 100,
+            var sideLength = 100,
             // JD: Wow, now that's what I call precision :)
             angle = Math.PI/6,
             scaleDiagonals = 0.75,
@@ -35,20 +33,36 @@ var getDrawLibrary = function() {
             //Draw grid frame    
             renderingContext.beginPath();
             renderingContext.moveTo(current.x, current.y);
-            renderingContext.lineTo(current.x + offset.x * sideLength, current.y - offset.y * sideLength);
-            renderingContext.lineTo(current.x + offset.x * sideLength, current.y - (offset.y + 1) * sideLength);
+            renderingContext.lineTo(
+                current.x + offset.x * sideLength, current.y - offset.y * sideLength
+            );
+            renderingContext.lineTo(
+                current.x + offset.x * sideLength, current.y - (offset.y + 1) * sideLength
+            );
             renderingContext.moveTo(current.x, current.y);
             renderingContext.lineTo(current.x, current.y -= sideLength);
-            renderingContext.lineTo(current.x + offset.x * sideLength, current.y - offset.y * sideLength);
-            renderingContext.lineTo(current.x + (offset.x - 1) * sideLength, current.y - offset.y * sideLength);
+            renderingContext.lineTo(
+                current.x + offset.x * sideLength, current.y - offset.y * sideLength
+            );
+            renderingContext.lineTo(
+                current.x + (offset.x - 1) * sideLength, current.y - offset.y * sideLength
+            );
             renderingContext.moveTo(current.x, current.y);
             renderingContext.lineTo(current.x -= sideLength, current.y);
-            renderingContext.lineTo(current.x + offset.x * sideLength, current.y - offset.y * sideLength);
-            renderingContext.lineTo(current.x + offset.x * sideLength, current.y - (offset.y - 1) * sideLength);
+            renderingContext.lineTo(   
+                current.x + offset.x * sideLength, current.y - offset.y * sideLength
+            );
+            renderingContext.lineTo(
+                current.x + offset.x * sideLength, current.y - (offset.y - 1) * sideLength
+            );
             renderingContext.moveTo(current.x, current.y);
             renderingContext.lineTo(current.x, current.y += sideLength);
-            renderingContext.lineTo(current.x + offset.x * sideLength, current.y - offset.y * sideLength);
-            renderingContext.lineTo(current.x + (offset.x + 1) * sideLength, current.y - offset.y * sideLength);
+            renderingContext.lineTo(
+                current.x + offset.x * sideLength, current.y - offset.y * sideLength
+            );
+            renderingContext.lineTo(
+                current.x + (offset.x + 1) * sideLength, current.y - offset.y * sideLength
+            );
             renderingContext.moveTo(current.x, current.y);
             renderingContext.lineTo(current.x += sideLength, current.y);
 
@@ -73,10 +87,8 @@ var getDrawLibrary = function() {
             }
         ],
         
-        planetWithRing: [function () {
-            var canvas = document.getElementById("canvas"),
-                renderingContext = canvas.getContext("2d"),
-                circleCenter = {x: 0, y: 0},
+        planetWithRing: [function (renderingContext) {
+            var circleCenter = {x: 0, y: 0},
                 radialGradientPlanet = renderingContext.createRadialGradient(
                     circleCenter.x - 96, circleCenter.y - 96, 1, circleCenter.x - 76, circleCenter.y - 76, 320
                 ),
@@ -133,6 +145,73 @@ var getDrawLibrary = function() {
             renderingContext.stroke();
 
         }],
+        
+        sun: [
+            function (renderingContext) {
+                var circleCenter = {x: 0, y: 0},
+                radialGradientSun = renderingContext.createRadialGradient(
+                    circleCenter.x - 96, circleCenter.y - 96, 1, circleCenter.x - 76, circleCenter.y - 76, 320
+                ),
+                circleRadius = 200;
+                
+                radialGradientSun.addColorStop(0, "red");
+                radialGradientSun.addColorStop(1, "orange");
+                
+                renderingContext.fillStyle = radialGradientSun;
+                renderingContext.beginPath();
+                renderingContext.arc(circleCenter.x, circleCenter.y, circleRadius, 0, Math.PI * 2, true);
+                renderingContext.fill();
+
+            },
+            function (renderingContext) {
+                var circleCenter = {x: 0, y: 0},
+                radialGradientSun = renderingContext.createRadialGradient(
+                    circleCenter.x + 96, circleCenter.y - 96, 1, circleCenter.x + 76, circleCenter.y - 76, 320
+                ),
+                circleRadius = 200;
+                
+                radialGradientSun.addColorStop(0, "red");
+                radialGradientSun.addColorStop(1, "orange");
+                
+                renderingContext.fillStyle = radialGradientSun;
+                renderingContext.beginPath();
+                renderingContext.arc(circleCenter.x, circleCenter.y, circleRadius, 0, Math.PI * 2, true);
+                renderingContext.fill();
+
+            },
+            function (renderingContext) {
+                var circleCenter = {x: 0, y: 0},
+                radialGradientSun = renderingContext.createRadialGradient(
+                    circleCenter.x + 96, circleCenter.y + 96, 1, circleCenter.x + 76, circleCenter.y + 76, 320
+                ),
+                circleRadius = 200;
+                
+                radialGradientSun.addColorStop(0, "red");
+                radialGradientSun.addColorStop(1, "orange");
+                
+                renderingContext.fillStyle = radialGradientSun;
+                renderingContext.beginPath();
+                renderingContext.arc(circleCenter.x, circleCenter.y, circleRadius, 0, Math.PI * 2, true);
+                renderingContext.fill();
+
+            },
+            function (renderingContext) {
+                var circleCenter = {x: 0, y: 0},
+                radialGradientSun = renderingContext.createRadialGradient(
+                    circleCenter.x - 96, circleCenter.y + 96, 1, circleCenter.x - 76, circleCenter.y + 76, 320
+                ),
+                circleRadius = 200;
+                
+                radialGradientSun.addColorStop(0, "red");
+                radialGradientSun.addColorStop(1, "orange");
+                
+                renderingContext.fillStyle = radialGradientSun;
+                renderingContext.beginPath();
+                renderingContext.arc(circleCenter.x, circleCenter.y, circleRadius, 0, Math.PI * 2, true);
+                renderingContext.fill();
+
+            }
+        ],
         
         background: function(renderingContext) {
             renderingContext.fillStyle = "black";

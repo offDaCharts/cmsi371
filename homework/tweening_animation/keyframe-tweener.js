@@ -105,7 +105,7 @@ var KeyframeTweener = {
             //renderingContext.clearRect(0, 0, width, height);
             
             //Apply background
-            //background(renderingContext);
+            background(renderingContext);
 
             // For every sprite, go to the current pair of keyframes.
             // Then, draw the sprite based on the current frame.
@@ -127,6 +127,11 @@ var KeyframeTweener = {
                         ease = startKeyframe.ease || KeyframeTweener.linear;
                         easeX = startKeyframe.easeX || ease;
                         easeY = startKeyframe.easeY || ease;
+                        nextPositionFunction =
+                            sprites[i].nextPositionFunction ||
+                            function(nextPos, numOfPos) {
+                                return (nextPos + 1) % numOfPos;
+                            };
                         
                         txStart = startKeyframe.tx || 0;
                         txDistance = (endKeyframe.tx || 0) - txStart;
@@ -156,9 +161,10 @@ var KeyframeTweener = {
 
                         // Draw the sprite.
                         sprites[i].draw[sprites[i].nextPosition](renderingContext);
+                        
                         //Update next postion state
                         sprites[i].nextPosition = 
-                            (sprites[i].nextPosition + 1) % sprites[i].numberOfPositions;
+                            nextPositionFunction(sprites[i].nextPosition, sprites[i].numberOfPositions);
 
                         // Clean up.
                         renderingContext.restore();
@@ -167,7 +173,7 @@ var KeyframeTweener = {
             }
 
             // Move to the next frame.
-            currentFrame = (currentFrame + 1) % 211;
+            currentFrame = (currentFrame + 1) % 200;
         }, 1000 / (settings.frameRate || 24));
     }
 };

@@ -118,7 +118,7 @@
                 nextPosition: 0,
                 keyframes: [
                     {
-                        frame: 10,
+                        frame: 0,
                         tx: 700,
                         ty: 500,
                         easeX: KeyframeTweener.sineEaseIn,
@@ -126,7 +126,7 @@
                     },
 
                     {
-                        frame: 60,
+                        frame: 50,
                         tx: 500,
                         ty: 700,
                         easeX: KeyframeTweener.sineEaseOut,
@@ -134,7 +134,7 @@
                     },
 
                     {
-                        frame: 110,
+                        frame: 100,
                         tx: 300,
                         ty: 500,
                         easeX: KeyframeTweener.sineEaseIn,
@@ -142,7 +142,7 @@
                     },
 
                     {
-                        frame: 160,
+                        frame: 150,
                         tx: 500,
                         ty: 300,
                         easeX: KeyframeTweener.sineEaseOut,
@@ -150,7 +150,7 @@
                     },
 
                     {
-                        frame: 210,
+                        frame: 200,
                         tx: 700,
                         ty: 500
                     }
@@ -163,48 +163,75 @@
                 nextPosition: 0,
                 keyframes: [
                     {
-                        frame: 10,
-                        tx: 400,
+                        frame: 0,
+                        tx: 500,
                         ty: 300,
-                        sx: 0.3,
-                        sy: 0.3,
+                        sx: 0.2,
+                        sy: 0.2,
                         easeX: KeyframeTweener.sineEaseIn,
                         easeY: KeyframeTweener.sineEaseOut
                     },
 
                     {
-                        frame: 60,
+                        frame: 50,
                         tx: 300,
-                        ty: 400,
-                        sx: 0.3,
-                        sy: 0.3,
+                        ty: 500,
+                        sx: 0.2,
+                        sy: 0.2,
                         easeX: KeyframeTweener.sineEaseOut,
                         easeY: KeyframeTweener.sineEaseIn
                     },
 
                     {
-                        frame: 110,
-                        tx: 200,
+                        frame: 100,
+                        tx: 100,
                         ty: 300,
-                        sx: 0.3,
-                        sy: 0.3,
+                        sx: 0.2,
+                        sy: 0.2,
                         easeX: KeyframeTweener.sineEaseIn,
                         easeY: KeyframeTweener.sineEaseOut
                     },
 
                     {
-                        frame: 160,
+                        frame: 150,
                         tx: 300,
-                        ty: 200,
-                        sx: 0.3,
-                        sy: 0.3,
+                        ty: 100,
+                        sx: 0.2,
+                        sy: 0.2,
                         easeX: KeyframeTweener.sineEaseOut,
                         easeY: KeyframeTweener.sineEaseIn
                     },
 
                     {
-                        frame: 210,
-                        tx: 400,
+                        frame: 200,
+                        tx: 500,
+                        ty: 300,
+                        sx: 0.2,
+                        sy: 0.2
+                    }
+                ]
+            },
+            
+            {
+                draw: drawLib.sun,
+                numberOfPositions: 4,
+                nextPosition: 0,
+                nextPositionFunction: function (nextPos, numOfPos) {
+                    return Math.floor(Math.random() * numOfPos);
+                },
+                
+                keyframes: [
+                    {
+                        frame: 0,
+                        tx: 300,
+                        ty: 300,
+                        sx: 0.3,
+                        sy: 0.3
+                    },
+
+                    {
+                        frame: 200,
+                        tx: 300,
                         ty: 300,
                         sx: 0.3,
                         sy: 0.3
