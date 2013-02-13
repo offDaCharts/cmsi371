@@ -7,10 +7,13 @@
     var canvas = document.getElementById("canvas"),
     
         // Variables for animation scene references
-        bigBangFrameStart = 200,
-        sunPos = {x: 400, y: 400},
+        bigBangFrameStart = 252,
+        sunPos = {x: 512, y: 400},
         planetRadius = 300,
         planetWithRingRadius = 150,
+        planetWithRingScale = 0.1,
+        sunScale = 0.2,
+        singularityStartScale = 0.1,
     
         //First, get library of drawing functions:
         drawLib = getDrawLibrary(),
@@ -21,13 +24,14 @@
         // Now, to actually define the animated sprites.  Each sprite
         // has a drawing function and an array of keyframes.
         sprites = [
+        
             {
                 draw: drawLib.planet,
                 numberOfPositions: 2,
                 nextPosition: 0,
                 keyframes: [
                     {
-                        frame: 0,
+                        frame: 0 + bigBangFrameStart,
                         tx: sunPos.x + planetRadius,
                         ty: sunPos.y,
                         easeX: KeyframeTweener.sineEaseIn,
@@ -35,7 +39,7 @@
                     },
 
                     {
-                        frame: 50,
+                        frame: 50 + bigBangFrameStart,
                         tx: sunPos.x,
                         ty: sunPos.y + planetRadius,
                         easeX: KeyframeTweener.sineEaseOut,
@@ -43,7 +47,7 @@
                     },
 
                     {
-                        frame: 100,
+                        frame: 100 + bigBangFrameStart,
                         tx: sunPos.x - planetRadius,
                         ty: sunPos.y,
                         easeX: KeyframeTweener.sineEaseIn,
@@ -51,7 +55,7 @@
                     },
 
                     {
-                        frame: 150,
+                        frame: 150 + bigBangFrameStart,
                         tx: sunPos.x,
                         ty: sunPos.y - planetRadius,
                         easeX: KeyframeTweener.sineEaseOut,
@@ -59,7 +63,7 @@
                     },
 
                     {
-                        frame: 200,
+                        frame: 200 + bigBangFrameStart,
                         tx: sunPos.x + planetRadius,
                         ty: sunPos.y
                     }
@@ -72,55 +76,55 @@
                 nextPosition: 0,
                 keyframes: [
                     {
-                        frame: 0,
+                        frame: 0 + bigBangFrameStart,
                         tx: sunPos.x + planetWithRingRadius,
                         ty: sunPos.y,
-                        sx: 0.2,
-                        sy: 0.2,
+                        sx: planetWithRingScale,
+                        sy: planetWithRingScale,
                         easeX: KeyframeTweener.sineEaseIn,
                         easeY: KeyframeTweener.sineEaseOut,
                         rotate: 0
                     },
 
                     {
-                        frame: 50,
+                        frame: 50 + bigBangFrameStart,
                         tx: sunPos.x,
                         ty: sunPos.y - planetWithRingRadius,
-                        sx: 0.2,
-                        sy: 0.2,
+                        sx: planetWithRingScale,
+                        sy: planetWithRingScale,
                         easeX: KeyframeTweener.sineEaseOut,
                         easeY: KeyframeTweener.sineEaseIn,
                         rotate: 180
                     },
 
                     {
-                        frame: 100,
+                        frame: 100 + bigBangFrameStart,
                         tx: sunPos.x - planetWithRingRadius,
                         ty: sunPos.y,
-                        sx: 0.2,
-                        sy: 0.2,
+                        sx: planetWithRingScale,
+                        sy: planetWithRingScale,
                         easeX: KeyframeTweener.sineEaseIn,
                         easeY: KeyframeTweener.sineEaseOut,
                         rotate: 360
                     },
 
                     {
-                        frame: 150,
+                        frame: 150 + bigBangFrameStart,
                         tx: sunPos.x,
                         ty: sunPos.y + planetWithRingRadius,
-                        sx: 0.2,
-                        sy: 0.2,
+                        sx: planetWithRingScale,
+                        sy: planetWithRingScale,
                         easeX: KeyframeTweener.sineEaseOut,
                         easeY: KeyframeTweener.sineEaseIn,
                         rotate: 540
                     },
 
                     {
-                        frame: 200,
+                        frame: 200 + bigBangFrameStart,
                         tx: sunPos.x + planetWithRingRadius,
                         ty: sunPos.y,
-                        sx: 0.2,
-                        sy: 0.2,
+                        sx: planetWithRingScale,
+                        sy: planetWithRingScale,
                         rotate: 720
                     }
                 ]
@@ -136,21 +140,136 @@
                 
                 keyframes: [
                     {
-                        frame: 0,
+                        frame: 0 + bigBangFrameStart,
                         tx: sunPos.x,
                         ty: sunPos.y,
-                        sx: 0.3,
-                        sy: 0.3
+                        sx: sunScale,
+                        sy: sunScale
                     },
 
                     {
-                        frame: 200,
+                        frame: 200 + bigBangFrameStart,
                         tx: sunPos.x,
                         ty: sunPos.y,
-                        sx: 0.3,
-                        sy: 0.3
+                        sx: sunScale,
+                        sy: sunScale
                     }
                 ]
+            },
+            
+            {
+                draw: drawLib.theSingularity,
+                numberOfPositions: 1,
+                nextPosition: 0,
+                keyframes: [
+                    {
+                        frame: 0,
+                        tx: 50,
+                        ty: 400,
+                        sx: singularityStartScale,
+                        sy: singularityStartScale,
+                        easeX: KeyframeTweener.sineEaseIn,
+                        easeY: KeyframeTweener.sineEaseOut
+                    },
+                    
+                    {
+                        frame: 30,
+                        tx: 100,
+                        ty: 450,
+                        sx: singularityStartScale,
+                        sy: singularityStartScale,
+                        easeX: KeyframeTweener.sineEaseOut,
+                        easeY: KeyframeTweener.sineEaseIn
+                    },
+                    
+                    {
+                        frame: 60,
+                        tx: 150,
+                        ty: 400,
+                        sx: singularityStartScale,
+                        sy: singularityStartScale,
+                        easeX: KeyframeTweener.sineEaseIn,
+                        easeY: KeyframeTweener.sineEaseOut
+                    },
+                    
+                    {
+                        frame: 90,
+                        tx: 200,
+                        ty: 350,
+                        sx: singularityStartScale,
+                        sy: singularityStartScale,
+                        easeX: KeyframeTweener.sineEaseOut,
+                        easeY: KeyframeTweener.sineEaseIn
+                    },
+                    
+                    {
+                        frame: 120,
+                        tx: 250,
+                        ty: 400,
+                        sx: singularityStartScale,
+                        sy: singularityStartScale,
+                        easeX: KeyframeTweener.sineEaseIn,
+                        easeY: KeyframeTweener.sineEaseOut
+                    },
+                    
+                    {
+                        frame: 150,
+                        tx: 300,
+                        ty: 450,
+                        sx: singularityStartScale,
+                        sy: singularityStartScale,
+                        easeX: KeyframeTweener.sineEaseOut,
+                        easeY: KeyframeTweener.sineEaseIn
+                    },
+                    
+                    {
+                        frame: 180,
+                        tx: 350,
+                        ty: 400,
+                        sx: singularityStartScale,
+                        sy: singularityStartScale,
+                        easeX: KeyframeTweener.sineEaseIn,
+                        easeY: KeyframeTweener.sineEaseOut
+                    },
+                    
+                    {
+                        frame: 210,
+                        tx: 400,
+                        ty: 350,
+                        sx: singularityStartScale,
+                        sy: singularityStartScale,
+                        easeX: KeyframeTweener.sineEaseOut,
+                        easeY: KeyframeTweener.sineEaseIn
+                    },
+                    
+                    {
+                        frame: 240,
+                        tx: 450,
+                        ty: 400,
+                        sx: singularityStartScale,
+                        sy: singularityStartScale,
+                        easeX: KeyframeTweener.sineEaseIn,
+                        easeY: KeyframeTweener.sineEaseOut
+                    },
+                    
+                    {
+                        frame: 250,
+                        tx: 450,
+                        ty: 400,
+                        sx: singularityStartScale,
+                        sy: singularityStartScale,
+                        ease: KeyframeTweener.quadEasein
+                    },
+                    
+                    {
+                        frame: 300,
+                        tx: 450,
+                        ty: 400,
+                        sx: 1000,
+                        sy: 1000,
+                    }
+                ]
+            
             }
         ];
 

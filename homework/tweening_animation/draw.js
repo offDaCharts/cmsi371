@@ -274,6 +274,22 @@ var getDrawLibrary = function() {
             }
         ],
         
+        theSingularity: [
+            function (renderingContext) {
+                var circleCenter = {x: 0, y: 0},
+                circleRadius = 50;
+                
+                renderingContext.fillStyle = "white";
+                renderingContext.beginPath();
+                renderingContext.arc(circleCenter.x, circleCenter.y, circleRadius, 0, Math.PI * 2, true);
+                renderingContext.lineWidth = 49;
+                renderingContext.strokeStyle = "white";
+                renderingContext.stroke();
+
+
+            }
+        ],
+        
         background: function(renderingContext) {
             renderingContext.fillStyle = "black";
             renderingContext.fillRect(0, 0, canvas.width, canvas.height);
