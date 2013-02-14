@@ -7,7 +7,7 @@
     var canvas = document.getElementById("canvas"),
     
         // Variables for animation scene references
-        bigBangFrameStart = 252,
+        bigBangFrameStart = 265,
         sunPos = {x: 512, y: 400},
         planetRadius = 300,
         planetWithRingRadius = 150,
@@ -262,11 +262,11 @@
                     },
                     
                     {
-                        frame: 300,
+                        frame: 260,
                         tx: 450,
                         ty: 400,
-                        sx: 1000,
-                        sy: 1000,
+                        sx: 50,
+                        sy: 50,
                     }
                 ]
             

@@ -175,7 +175,7 @@ var KeyframeTweener = {
 
             // Move to the next frame.
             currentFrame++;
-            currentFrame = (currentFrame > 452) ? 252 : currentFrame;
+            currentFrame = (currentFrame > 455) ? 256 : currentFrame;
         }, 1000 / (settings.frameRate || 24));
     }
 };
