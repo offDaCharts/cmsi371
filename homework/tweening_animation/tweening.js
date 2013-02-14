@@ -13,7 +13,7 @@
         planetWithRingRadius = 150,
         planetWithRingScale = 0.1,
         sunScale = 0.2,
-        singularityStartScale = 0.1,
+        singularityStartScale = 0.03,
     
         //First, get library of drawing functions:
         drawLib = getDrawLibrary(),
