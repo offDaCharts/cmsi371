@@ -128,6 +128,7 @@ var KeyframeTweener = {
                         ease = startKeyframe.ease || KeyframeTweener.linear;
                         easeX = startKeyframe.easeX || ease;
                         easeY = startKeyframe.easeY || ease;
+                        // JD: Nice twist on the internal animation functionality here.
                         nextPositionFunction =
                             sprites[i].nextPositionFunction ||
                             function(nextPos, numOfPos) {
@@ -175,6 +176,11 @@ var KeyframeTweener = {
 
             // Move to the next frame.
             currentFrame++;
+
+            // JD: The hardcoded numbers here are a touch concerning---they carry
+            //     some pretty strong assumptions on the looping needs of the
+            //     scene.  These aren't too hard to send in as part of the
+            //     animation settings and are best done as such.
             currentFrame = (currentFrame > 455) ? 256 : currentFrame;
         }, 1000 / (settings.frameRate || 24));
     }
