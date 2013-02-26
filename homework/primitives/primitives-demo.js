@@ -3,7 +3,13 @@
  * calls to the functions in the Primitives module.
  */
 (function () {
-    var renderingContext = document.getElementById("scratch").getContext("2d");
+    var renderingContext = document.getElementById("scratch").getContext("2d"),
+        gradient = {
+            xStart: 0,
+            xStop: 300,
+            colorStart: [255,0,0],
+            colorStop: [0,255,0]
+        };
 
     // Start with rectangles.
     renderingContext.fillStyle = "gray"; // For demonstrating the no-color case.
@@ -24,7 +30,7 @@
     Primitives.lineBresenhamDash(renderingContext, 825, 210, 1024, 110, 5);
 
     // A few circles.
-    Primitives.circleTrig(renderingContext, 105, 315, 100);
+    Primitives.circleTrigGradient(renderingContext, 105, 315, 100, gradient);
     Primitives.circleDDA(renderingContext, 310, 315, 100);
     Primitives.circleBres1(renderingContext, 515, 315, 100);
     Primitives.circleBres2(renderingContext, 720, 315, 100);

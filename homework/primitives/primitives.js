@@ -248,11 +248,53 @@ var Primitives = {
             k1 = dy << 1, // dy divided by 2.
             err = k1 - dx,
             k2 = (dy - dx) << 1; // dy - dx divided by 2.
-            
 
         color = color || [0, 0, 0];
         while (true) {
             this.setPixel(context, x, y, color[0], color[1], color[2]);
+            if (x === x2) {
+                return;
+            }
+
+            x += 1;
+            if (err < 0) {
+                err += k1;
+            } else {
+                y -= 1;
+                err += k2;
+            }
+        }
+    },
+    
+    // Brensenhem algorithm with gradient
+    lineBresenhamGrad: function (context, x1, y1, x2, y2, gradient) {
+        var x = x1,
+            y = y1,
+            dx = x2 - x1,
+            dy = y1 - y2,
+            k1 = dy << 1, // dy divided by 2.
+            err = k1 - dx,
+            k2 = (dy - dx) << 1, // dy - dx divided by 2.
+            placeInGradient;
+            
+
+        gradient = gradient || 
+        {
+            xStart: 0,
+            xStop: 1,
+            colorStart: [0,0,0],
+            colorStop: [0,0,0]
+        };
+        
+        while (true) {
+            placeInGradient = (x - gradient.xStart)/(gradient.xStop - gradient.xStart);
+        
+            this.setPixel(context, x, y, 
+                gradient.colorStart[0] + (gradient.colorStop[0] - gradient.colorStart[0]) * placeInGradient,
+                gradient.colorStart[1] + (gradient.colorStop[1] - gradient.colorStart[1]) * placeInGradient,
+                gradient.colorStart[2] + (gradient.colorStop[2] - gradient.colorStart[2]) * placeInGradient
+                );
+                
             if (x === x2) {
                 return;
             }
@@ -318,6 +360,14 @@ var Primitives = {
         this.setPixel(context, xc - y, yc + x, color[0], color[1], color[2]);
         this.setPixel(context, xc - y, yc - x, color[0], color[1], color[2]);
     },
+    
+    fillCirclePoints: function (context, xc, yc, x, y, gradient) {
+        
+        this.lineBresenhamGrad(context, Math.round(xc - x), Math.round(yc + y), Math.round(xc + x), Math.round(yc + y), gradient);
+        this.lineBresenhamGrad(context, Math.round(xc - x), Math.round(yc - y), Math.round(xc + x), Math.round(yc - y), gradient);
+        this.lineBresenhamGrad(context, Math.round(xc - y), Math.round(yc - x), Math.round(xc + y), Math.round(yc - x), gradient);
+        this.lineBresenhamGrad(context, Math.round(xc - y), Math.round(yc + x), Math.round(xc + y), Math.round(yc + x), gradient);
+    },
 
     // First, the most naive possible implementation: circle by trigonometry.
     circleTrig: function (context, xc, yc, r, color) {
@@ -337,6 +387,27 @@ var Primitives = {
             y = x * s + y * c;
         }
     },
+
+    // Draws a filled circle with a linear gradient
+    circleTrigGradient: function (context, xc, yc, r, gradient) {
+        var theta = 1 / r,
+
+            // At the very least, we compute our sine and cosine just once.
+            s = Math.sin(theta),
+            c = Math.cos(theta),
+
+            // We compute the first octant, from zero to pi/4.
+            x = r,
+            y = 0;
+
+        while (x >= y) {
+            this.fillCirclePoints(context, xc, yc, x, y, gradient);
+            x = x * c - y * s;
+            y = x * s + y * c;
+        }
+    },
+    
+
 
     // Now DDA.
     circleDDA: function (context, xc, yc, r, color) {
