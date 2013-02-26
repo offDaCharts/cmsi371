@@ -50,12 +50,34 @@
     renderingContext.fillRect(0, 200, 512, 312);
 
     // Set a little event handler to apply the filter.
-    $("#apply-filter-button").click(function () {
+    $("#apply-darkener").click(function () {
+        // Filter time.
+        renderingContext.putImageData(
+            Nanoshop.applyFilter(
+                renderingContext.getImageData(0, 0, canvas.width, canvas.height),
+                darkener
+            ),
+            0, 0
+        );
+    });
+    
+    $("#apply-blackAndWhite").click(function () {
         // Filter time.
         renderingContext.putImageData(
             Nanoshop.applyFilter(
                 renderingContext.getImageData(0, 0, canvas.width, canvas.height),
                 blackAndWhiteFilter
+            ),
+            0, 0
+        );
+    });
+    
+    $("#apply-contrast").click(function () {
+        // Filter time.
+        renderingContext.putImageData(
+            Nanoshop.applyFilter(
+                renderingContext.getImageData(0, 0, canvas.width, canvas.height),
+                contrastFilter
             ),
             0, 0
         );
