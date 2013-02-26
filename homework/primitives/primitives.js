@@ -406,8 +406,6 @@ var Primitives = {
             y = x * s + y * c;
         }
     },
-    
-
 
     // Now DDA.
     circleDDA: function (context, xc, yc, r, color) {
@@ -417,6 +415,19 @@ var Primitives = {
 
         while (x >= y) {
             this.plotCirclePoints(context, xc, yc, x, y, color);
+            x = x - (epsilon * y);
+            y = y + (epsilon * x);
+        }
+    },
+
+    // Now DDA with fill gradient.
+    circleDDAGradient: function (context, xc, yc, r, gradient) {
+        var epsilon = 1 / r,
+            x = r,
+            y = 0;
+
+        while (x >= y) {
+            this.fillCirclePoints(context, xc, yc, x, y, gradient);
             x = x - (epsilon * y);
             y = y + (epsilon * x);
         }
@@ -440,6 +451,27 @@ var Primitives = {
         }
         if (x === y) {
             this.plotCirclePoints(context, xc, yc, x, y, color);
+        }
+    },
+
+    // One of three Bresenham-like approaches with gradient.
+    circleBres1Gradient: function (context, xc, yc, r, gradient) {
+        var p = 3 - 2 * r,
+            x = 0,
+            y = r;
+
+        while (x < y) {
+            this.fillCirclePoints(context, xc, yc, x, y, gradient);
+            if (p < 0) {
+                p = p + 4 * x + 6;
+            } else {
+                p = p + 4 * (x - y) + 10;
+                y -= 1;
+            }
+            x += 1;
+        }
+        if (x === y) {
+            this.fillCirclePoints(context, xc, yc, x, y, gradient);
         }
     },
 
@@ -468,6 +500,31 @@ var Primitives = {
         }
     },
 
+    // And another with gradient...
+    circleBres2Gradient: function (context, xc, yc, r, gradient) {
+        var x = 0,
+            y = r,
+            e = 1 - r,
+            u = 1,
+            v = e - r;
+
+        while (x <= y) {
+            this.fillCirclePoints(context, xc, yc, x, y, gradient);
+            if (e < 0) {
+                x += 1;
+                u += 2;
+                v += 2;
+                e += u;
+            } else {
+                x += 1;
+                y -= 1;
+                u += 2;
+                v += 4;
+                e += v;
+            }
+        }
+    },
+
     // Last but not least...
     circleBres3: function (context, xc, yc, r, color) {
         var x = r,
@@ -476,6 +533,23 @@ var Primitives = {
 
         while (y <= x) {
             this.plotCirclePoints(context, xc, yc, x, y, color);
+            y += 1;
+            e += (2 * y - 1);
+            if (e > x) {
+                x -= 1;
+                e -= (2 * x + 1);
+            }
+        }
+    },
+
+    // Last but not least with gradient...
+    circleBres3Gradient: function (context, xc, yc, r, gradient) {
+        var x = r,
+            y = 0,
+            e = 0;
+
+        while (y <= x) {
+            this.fillCirclePoints(context, xc, yc, x, y, gradient);
             y += 1;
             e += (2 * y - 1);
             if (e > x) {

@@ -3,10 +3,11 @@
  * calls to the functions in the Primitives module.
  */
 (function () {
-    var renderingContext = document.getElementById("scratch").getContext("2d"),
+    var canvas = document.getElementById("scratch"),
+        renderingContext = document.getElementById("scratch").getContext("2d"),
         gradient = {
             xStart: 0,
-            xStop: 300,
+            xStop: canvas.width,
             colorStart: [255,0,0],
             colorStop: [0,255,0]
         };
@@ -31,10 +32,10 @@
 
     // A few circles.
     Primitives.circleTrigGradient(renderingContext, 105, 315, 100, gradient);
-    Primitives.circleDDA(renderingContext, 310, 315, 100);
-    Primitives.circleBres1(renderingContext, 515, 315, 100);
-    Primitives.circleBres2(renderingContext, 720, 315, 100);
-    Primitives.circleBres3(renderingContext, 925, 315, 100);
+    Primitives.circleDDAGradient(renderingContext, 310, 315, 100, gradient);
+    Primitives.circleBres1Gradient(renderingContext, 515, 315, 100, gradient);
+    Primitives.circleBres2Gradient(renderingContext, 720, 315, 100, gradient);
+    Primitives.circleBres3Gradient(renderingContext, 925, 315, 100, gradient);
 
     // And finally...polygon fills!
     renderingContext.save();
