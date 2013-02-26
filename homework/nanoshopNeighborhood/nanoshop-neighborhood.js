@@ -36,6 +36,20 @@ var NanoshopNeighborhood = {
 
         return [ rTotal / 9, gTotal / 9, bTotal / 9, aTotal / 9 ];
     },
+    
+    diagonalBlurr: function (rgbaNeighborhood) {
+        return [ (rgbaNeighborhood[0].r + rgbaNeighborhood[4].r + rgbaNeighborhood[8].r) / 3,
+                (rgbaNeighborhood[0].g + rgbaNeighborhood[4].g + rgbaNeighborhood[8].g) / 3,
+                (rgbaNeighborhood[0].b + rgbaNeighborhood[4].b + rgbaNeighborhood[8].b) / 3,
+                (rgbaNeighborhood[0].a + rgbaNeighborhood[4].a + rgbaNeighborhood[8].a) / 3,];
+    },
+    
+    random: function (rgbaNeighborhood) {
+        return [ rgbaNeighborhood[Math.floor(Math.random() * 9)].r,
+                rgbaNeighborhood[Math.floor(Math.random() * 9)].g,
+                rgbaNeighborhood[Math.floor(Math.random() * 9)].b,
+                rgbaNeighborhood[Math.floor(Math.random() * 9)].a];
+    },
 
     /*
      * Applies the given filter to the given ImageData object,
