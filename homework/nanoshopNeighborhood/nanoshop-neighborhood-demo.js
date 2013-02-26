@@ -29,15 +29,34 @@
     }
     
     // Set a little event handler to apply the filter.
-    $("#apply-filter-button").click(function () {
+    $("#apply-averager").click(function () {
         // Filter time.
         renderingContext.putImageData(
             NanoshopNeighborhood.applyFilter(
                 renderingContext.getImageData(0, 0, canvas.width, canvas.height),
-                //NanoshopNeighborhood.darkener
-                //NanoshopNeighborhood.averager 
-                //NanoshopNeighborhood.diagonalBlurr 
+                NanoshopNeighborhood.averager 
+            ),
+            0, 0
+        );
+    });
+    
+    $("#apply-randomize").click(function () {
+        // Filter time.
+        renderingContext.putImageData(
+            NanoshopNeighborhood.applyFilter(
+                renderingContext.getImageData(0, 0, canvas.width, canvas.height),
                 NanoshopNeighborhood.random 
+            ),
+            0, 0
+        );
+    });
+    
+    $("#apply-diagBlurr").click(function () {
+        // Filter time.
+        renderingContext.putImageData(
+            NanoshopNeighborhood.applyFilter(
+                renderingContext.getImageData(0, 0, canvas.width, canvas.height), 
+                NanoshopNeighborhood.diagonalBlurr 
             ),
             0, 0
         );
