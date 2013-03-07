@@ -5,6 +5,11 @@
 (function () {
     var canvas = document.getElementById("scratch"),
         renderingContext = document.getElementById("scratch").getContext("2d"),
+
+        // JD: Interesting---not exactly the way that I intended it,
+        //     but it still captures the expected logic, so this will
+        //     do. (the intent was more like fillRect---the colors are
+        //     supplied per function call)
         gradient = {
             xStart: 0,
             xStop: canvas.width,

@@ -37,11 +37,24 @@ var NanoshopNeighborhood = {
         return [ rTotal / 9, gTotal / 9, bTotal / 9, aTotal / 9 ];
     },
     
+    // JD: The way you did the filters here---that was also the intent
+    //     in single-pixel Nanoshop.
     diagonalBlurr: function (rgbaNeighborhood) {
+        // JD: From a formatting perspective, the [ ] delimit a new level
+        //     of structure, and this justifies a new indentation level.
+        //     Recommended spacing is shown in the comment below.
         return [ (rgbaNeighborhood[0].r + rgbaNeighborhood[4].r + rgbaNeighborhood[8].r) / 3,
                 (rgbaNeighborhood[0].g + rgbaNeighborhood[4].g + rgbaNeighborhood[8].g) / 3,
                 (rgbaNeighborhood[0].b + rgbaNeighborhood[4].b + rgbaNeighborhood[8].b) / 3,
                 (rgbaNeighborhood[0].a + rgbaNeighborhood[4].a + rgbaNeighborhood[8].a) / 3,];
+        /* JD: Easier to read; reflects the structure better:
+        return [
+            (rgbaNeighborhood[0].r + rgbaNeighborhood[4].r + rgbaNeighborhood[8].r) / 3,
+            (rgbaNeighborhood[0].g + rgbaNeighborhood[4].g + rgbaNeighborhood[8].g) / 3,
+            (rgbaNeighborhood[0].b + rgbaNeighborhood[4].b + rgbaNeighborhood[8].b) / 3,
+            (rgbaNeighborhood[0].a + rgbaNeighborhood[4].a + rgbaNeighborhood[8].a) / 3
+        ];
+        */
     },
     
     random: function (rgbaNeighborhood) {

@@ -10,7 +10,18 @@
         darkener = function (r, g, b, a) { // This is a basic "darkener."
                     return [r / 2, g / 2, b / 2, a];
                 },
+
+        // JD: This all works out fine, but you missed the additional step
+        //     of adding these to the actual Nanoshop object as the
+        //     start of a library of filter functions.
+        //
+        //     (see the way you did NanoshopNeighborhood)
         contrastFilter = function (r, g, b, a) { // This is a basic contrast filter
+            // JD: Why aren't ri, gi, and bi preceded by var?
+            //     This makes them global variables!
+            //
+            //     Also, you need Math.floor if you intend these to be
+            //     integer operations.  (try 1 / 2 in JavaScript)
                     ri = r/(max);
                     gi = g/(max);
                     bi = b/(max);
@@ -19,7 +30,9 @@
                     b = max*(-2*Math.pow(bi,3)+3*Math.pow(bi,2));
                     return [r, g, b, a];
                 },
+        // JD: Hmmm...a little tight in here...
         blackAndWhiteFilter = function (r, g, b, a) { // This is a basic black and white filter
+            // JD: Same thing here with grey.
                     grey = (r+g+b)/3;
                     return [grey, grey, grey, a];
                 },

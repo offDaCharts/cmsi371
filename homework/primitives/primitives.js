@@ -267,6 +267,9 @@ var Primitives = {
     },
     
     // Brensenhem algorithm with gradient
+    // JD: Nice design move here, building a gradient version of the line
+    //     segment algorithm instead of embedding the gradient logic right
+    //     inside plotCirclePoints.
     lineBresenhamGrad: function (context, x1, y1, x2, y2, gradient) {
         var x = x1,
             y = y1,
@@ -323,6 +326,7 @@ var Primitives = {
 
         color = color || [0, 0, 0];
         while (true) {
+            // JD: Logic is good---but space this out more consistently please!
             if(dashCount >= dash) {
                 dashCount = 0;
             }else {
@@ -362,7 +366,9 @@ var Primitives = {
     },
     
     fillCirclePoints: function (context, xc, yc, x, y, gradient) {
-        
+        // JD: Nice and clean, thanks to placement of gradient code in
+        //     the line routine. (this approach will still work with the
+        //     one-gradient-per-circle call, BTW)
         this.lineBresenhamGrad(context, Math.round(xc - x), Math.round(yc + y), Math.round(xc + x), Math.round(yc + y), gradient);
         this.lineBresenhamGrad(context, Math.round(xc - x), Math.round(yc - y), Math.round(xc + x), Math.round(yc - y), gradient);
         this.lineBresenhamGrad(context, Math.round(xc - y), Math.round(yc - x), Math.round(xc + y), Math.round(yc - x), gradient);
