@@ -106,7 +106,7 @@ var KeyframeTweener = {
             //renderingContext.clearRect(0, 0, width, height);
             
             //Apply background
-            background(renderingContext);
+            //background(renderingContext);
 
             // For every sprite, go to the current pair of keyframes.
             // Then, draw the sprite based on the current frame.
