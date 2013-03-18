@@ -170,9 +170,18 @@
         },
 
         {
-            color: { r: 0.0, g: 0.5, b: 0.0 },
+            /*color: { r: 0.0, g: 0.5, b: 0.0 },
             vertices: Shapes.toRawLineArray(Shapes.icosahedron()),
-            mode: gl.LINES
+            mode: gl.LINES*/
+            /*color: { r: 0.0, g: 0.5, b: 0.0 },
+            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+            mode: gl.TRIANGLES*/
+            /*color: { r: 0.0, g: 0.5, b: 0.0 },
+            vertices: Shapes.toRawTriangleArray(Shapes.octahedren()),
+            mode: gl.TRIANGLES*/
+            color: { r: 0.0, g: 0.5, b: 0.0 },
+            vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
+            mode: gl.TRIANGLES
         }
     ];
 
@@ -247,6 +256,8 @@
         gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
         gl.drawArrays(object.mode, 0, object.vertices.length / 3);
     };
+    
+    
 
     /*
      * Displays the scene.
