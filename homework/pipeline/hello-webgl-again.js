@@ -125,7 +125,7 @@
 
     // Build the objects to display.
     objectsToDraw = [
-        [
+        /*[
             {
                 color: { r: 0.0, g: 0.5, b: 0.5 },
                 vertices: Shapes.toRawLineArray(Shapes.icosahedron()),
@@ -149,7 +149,7 @@
                 vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
                 mode: gl.TRIANGLES
             }
-        ],
+        ],*/
         
         [
             {
