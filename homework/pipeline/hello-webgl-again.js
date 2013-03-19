@@ -154,8 +154,8 @@
         [
             {
                 color: { r: 0.0, g: 1, b: 1 },
-                vertices: Shapes.toRawTriangleArray(Shapes.sphere()),
-                mode: gl.TRIANGLES
+                vertices: Shapes.toRawLineArray(Shapes.sphere()),
+                mode: gl.LINES
             }
         ]
     ];

@@ -169,6 +169,8 @@ var Shapes = {
             dHor,
             pitchAngle,
             yawAngle,
+            xRatios = [],
+            zRatios = [],
             
             //Loop variables
             i,
@@ -181,13 +183,20 @@ var Shapes = {
         dVert = Math.PI / verticalSections;
         dHor = 2 * Math.PI / horizontalSections;
         
+        //Find x and z ratios so they don't have to be calculated everytime
+        for(yawAngle = 0; yawAngle < 2 * Math.PI; yawAngle += dHor) {
+            xRatios.push(Math.cos(yawAngle));
+            zRatios.push(-1 * Math.sin(yawAngle));
+        }
+        
         //Create vertices
         for(pitchAngle = dVert; pitchAngle < Math.PI; pitchAngle += dVert) {
             y = Math.cos(pitchAngle);
             r = Math.sqrt(1 - y * y);
-            for(yawAngle = 0; yawAngle < 2 * Math.PI; yawAngle += dHor) {
-                x = r * Math.cos(yawAngle);
-                z = r * -1 * Math.sin(yawAngle);
+            //for(yawAngle = 0; yawAngle < 2 * Math.PI; yawAngle += dHor) {
+            for(j = 0; j < horizontalSections; j++) {
+                x = r * xRatios[j];
+                z = r * zRatios[j];
                 verticies.push([ x, y, z ]);
             }
         }
