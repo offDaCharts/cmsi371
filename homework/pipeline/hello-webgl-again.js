@@ -25,6 +25,9 @@
         vertexPosition,
         vertexColor,
 
+        //Create function to pass vertices
+        passVertices,
+        
         // An individual "draw object" function.
         drawObject,
 
@@ -125,65 +128,69 @@
 
     // Build the objects to display.
     objectsToDraw = [
-        /*[
-            {
-                color: { r: 0.0, g: 0.5, b: 0.5 },
-                vertices: Shapes.toRawLineArray(Shapes.icosahedron()),
-                mode: gl.LINES
-            },
-            {
-                color: { r: 0.0, g: 0.0, b: 0.5 },
-                vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-                mode: gl.TRIANGLES
-            }
-        ],
+        {
+            color: { r: 0.0, g: 0.5, b: 0.5 },
+            vertices: Shapes.toRawLineArray(Shapes.icosahedron()),
+            mode: gl.LINES,
+            children: [
+                /*{
+                    color: { r: 0.5, g: 0.0, b: 0.0 },
+                    vertices: Shapes.toRawLineArray(Shapes.octahedren()),
+                    mode: gl.LINES
+                },
+                
+                {
+                    color: { r: 0.0, g: 0.0, b: 0.5 },
+                    vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+                    mode: gl.TRIANGLES
+                }*/
+            ]
+        },
         
-        [
-            {
-                color: { r: 0.5, g: 0.0, b: 0.0 },
-                vertices: Shapes.toRawLineArray(Shapes.octahedren()),
-                mode: gl.LINES
-            },
-            {
-                color: { r: 0.0, g: 0.5, b: 0.0 },
-                vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
-                mode: gl.TRIANGLES
-            }
-        ],*/
-        
-        [
-            {
-                color: { r: 0.0, g: 1, b: 1 },
-                vertices: Shapes.toRawLineArray(Shapes.sphere()),
-                mode: gl.LINES
-            }
-        ]
+        {
+            color: { r: 0.0, g: 0.5, b: 0.0 },
+            vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
+            mode: gl.TRIANGLES
+        },
+  
+        {
+            color: { r: 0.0, g: 1, b: 1 },
+            vertices: Shapes.toRawLineArray(Shapes.sphere()),
+            mode: gl.LINES
+        }
     ];
+    
+    passVertices = function(object) {
+        // Pass the vertices to WebGL.
+        for (i = 0, maxi = object.length; i < maxi; i += 1) {
+            object[i].buffer = GLSLUtilities.initVertexBuffer(gl,
+                    object[i].vertices);
 
-    // Pass the vertices to WebGL.
-    for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
-        for(objNum in objectsToDraw[i]) {
-            objectsToDraw[i][objNum].buffer = GLSLUtilities.initVertexBuffer(gl,
-                    objectsToDraw[i][objNum].vertices);
-
-            if (!objectsToDraw[i][objNum].colors) {
+            if (!object[i].colors) {
                 // If we have a single color, we expand that into an array
                 // of the same color over and over.
-                objectsToDraw[i][objNum].colors = [];
-                for (j = 0, maxj = objectsToDraw[i][objNum].vertices.length / 3;
+                object[i].colors = [];
+                for (j = 0, maxj = object[i].vertices.length / 3;
                         j < maxj; j += 1) {
-                    objectsToDraw[i][objNum].colors = objectsToDraw[i][objNum].colors.concat(
-                        objectsToDraw[i][objNum].color.r,
-                        objectsToDraw[i][objNum].color.g,
-                        objectsToDraw[i][objNum].color.b
+                    object[i].colors = object[i].colors.concat(
+                        object[i].color.r,
+                        object[i].color.g,
+                        object[i].color.b
                     );
                 }
             }
-            objectsToDraw[i][objNum].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
-                    objectsToDraw[i][objNum].colors);
+            object[i].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
+                    object[i].colors);
+        
+            /*if(object[i].children) {
+                passVertices(object[i].children);
+            }*/
         }
-    }
+    };
+    
+    passVertices(objectsToDraw);
 
+    
     // Initialize the shaders.
     shaderProgram = GLSLUtilities.initSimpleShaderProgram(
         gl,
@@ -224,18 +231,21 @@
      * Displays an individual object.
      */
     drawObject = function (object) {
-        for(objNum in object) {
-            // Set the varying colors.
-            gl.bindBuffer(gl.ARRAY_BUFFER, object[objNum].colorBuffer);
-            gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
+        // Set the varying colors.
+        gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
+        gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
 
-            
-            
-            // Set the varying vertex coordinates.
-            gl.bindBuffer(gl.ARRAY_BUFFER, object[objNum].buffer);
-            gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
-            gl.drawArrays(object[objNum].mode, 0, object[objNum].vertices.length / 3);
-        }
+        
+        
+        // Set the varying vertex coordinates.
+        gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
+        gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
+        gl.drawArrays(object.mode, 0, object.vertices.length / 3);
+        /*if(object.children !== null) {
+            for(child in object.children) {
+                drawObject(object.children[child]);
+            }
+        }*/
     };
 
     /*
