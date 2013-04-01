@@ -27,6 +27,18 @@ $(function () {
              4,5,6,1],
              "pure translate matrix");
 
+        // JD: A word of caution---when dealing with floating point,
+        //     JavaScript implementations might sometimes differ.
+        //     Make sure to run this in multiple browsers to see
+        //     if there are discrepancies.  Safest scenario in case
+        //     JavaScript implementations yield different results is
+        //     to build the expected expression into your expected
+        //     answer instead of a literal.
+        //
+        //     Now, for *this* particular test, results are consistent
+        //     in Chrome, Firefox, and Safari.  So I don't think you
+        //     have to tweak this, but just be aware that this might
+        //     happen with future tests.
         deepEqual(m.getRotationMatrix(Math.PI,0,0,1).elements,
             [0.9984971498638638,-0.054803665148789524,0,0,
              0.054803665148789524,0.9984971498638638,0,0,
