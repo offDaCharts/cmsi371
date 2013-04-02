@@ -22,6 +22,7 @@
         currentRotation = 0.0,
         currentInterval,
         rotationMatrix,
+        projectionMatrix,
         vertexPosition,
         vertexColor,
 
@@ -219,6 +220,7 @@
     vertexColor = gl.getAttribLocation(shaderProgram, "vertexColor");
     gl.enableVertexAttribArray(vertexColor);
     rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
+    projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
 
     /*
      * Displays an individual object.
@@ -256,6 +258,14 @@
         // All done.
         gl.flush();
     };
+
+    // Set up the projection.
+    gl.uniformMatrix4fv(projectionMatrix,
+        gl.FALSE,
+        new Float32Array(
+            frustrum(-2.5, 2.5, -2.5, 2.5, 0.1, 10000).conversionConvenience()
+        )
+    );
 
     // Draw the initial scene.
     drawScene();

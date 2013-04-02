@@ -49,9 +49,10 @@
             attribute vec3 vertexColor;
             varying vec4 finalVertexColor;
             uniform mat4 rotationMatrix;
+            uniform mat4 projectionMatrix;
 
             void main(void) {
-                gl_Position = rotationMatrix * vec4(vertexPosition, 1.0);
+                gl_Position = projectionMatrix * rotationMatrix * vec4(vertexPosition.xy, vertexPosition.z, 1.0);
                 finalVertexColor = vec4(vertexColor, 1.0);
             }
         </script>
@@ -71,6 +72,9 @@
                 gl_FragColor = vec4((1.0 - gl_FragCoord.z) * finalVertexColor.rgb, 1.0);
             }
         </script>
+
+        <!-- Load up our matrix library. -->
+        <script src="matrixLibrary/matrix.js"></script>
 
         <!-- This script sets up the specific scene for this page. -->
         <script src="hello-webgl-again.js"></script>
