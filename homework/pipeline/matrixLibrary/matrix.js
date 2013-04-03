@@ -18,7 +18,7 @@ var Matrix4x4 = (function () {
     };
     
     //Matrix for scaling objects
-    matrix4x4.prototype.getScaleMatrix = function (sx,sy,sz) {
+    matrix4x4.getScaleMatrix = function (sx,sy,sz) {
         return new Matrix4x4(
                 sx,0,0,0,
                 0,sy,0,0,
@@ -27,7 +27,7 @@ var Matrix4x4 = (function () {
     };
 
     //Matrix for translating objects
-    matrix4x4.prototype.getTranslateMatrix = function (dx,dy,dz) {
+    matrix4x4.getTranslateMatrix = function (dx,dy,dz) {
         return new Matrix4x4(
                 1,0,0,0,
                 0,1,0,0,
@@ -107,18 +107,18 @@ var Matrix4x4 = (function () {
     matrix4x4.prototype.conversionConvenience = function () {
         var x,
             y,
-            flippedMatrixArray = [];
+            flippedMatrix = new Matrix4x4();
             
         for(y = 0; y < 4; y++) {
             for(x = 0; x < 4; x++) {
-                flippedMatrixArray[y*4+x] = this.elements[x*4+y];
+                flippedMatrix.elements[y*4+x] = this.elements[x*4+y];
             }
         }
         
-        return flippedMatrixArray;
+        return flippedMatrix;
     };
     
-    ortho = function (left, right, bottom, top, front, back) {
+    matrix4x4.ortho = function (left, right, bottom, top, front, back) {
             return new Matrix4x4(
                 2.0/(right-left),0,0,-(right+left)/(right-left),
                 0,2.0/(top-bottom),0,-(top+bottom)/(top-bottom),
@@ -127,7 +127,7 @@ var Matrix4x4 = (function () {
             );
     }
     
-    frustrum = function (left, right, bottom, top, front, back) {
+    matrix4x4.frustum = function (left, right, bottom, top, front, back) {
             return new Matrix4x4(
                 2.0*front/(right-left),0,(right+left)/(right-left),0,
                 0,2.0*front/(top-bottom),(top+bottom)/(top-bottom),0,
