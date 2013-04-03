@@ -195,12 +195,14 @@
         gl.flush();
     };
 
-    //Set up projection matrix
-    gl.uniformMatrix4fv(projectionMatrix, gl.FALSE, new Float32Array(
-    //Matrix4x4.ortho(-10, 10, -10, 10, 10, -10).conversionConvenience.elements
-    new Matrix4x4().elements
-    ));
-    
+    // Set up the projection.
+    gl.uniformMatrix4fv(projectionMatrix,
+        gl.FALSE,
+        new Float32Array(
+            frustrum(-2.5, 2.5, -2.5, 2.5, 10, 10000).conversionConvenience()
+        )
+    );
+
     // Draw the initial scene.
     drawScene();
 

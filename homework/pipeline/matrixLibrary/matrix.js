@@ -131,7 +131,7 @@ var Matrix4x4 = (function () {
             return new Matrix4x4(
                 2.0*front/(right-left),0,(right+left)/(right-left),0,
                 0,2.0*front/(top-bottom),(top+bottom)/(top-bottom),0,
-                0,0,(front+back)/(back-front),2.0*front*back/(back-front),
+                0,0,-(front+back)/(back-front),-2.0*front*back/(back-front),
                 0,0,-1,0
             );
     }
