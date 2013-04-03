@@ -36,7 +36,7 @@ var Matrix4x4 = (function () {
     };
 
     //Matrix for rotating objects
-    matrix4x4.prototype.getRotationMatrix = function (angle, x, y, z) {
+    Matrix4x4.getRotationMatrix = function (angle, x, y, z) {
         var axisLength = Math.sqrt((x * x) + (y * y) + (z * z)),
             s = Math.sin(angle * Math.PI / 180.0),
             c = Math.cos(angle * Math.PI / 180.0),
@@ -104,7 +104,7 @@ var Matrix4x4 = (function () {
     };
     
     //Covert from row order to collumn order
-    matrix4x4.prototype.conversionConvenience = function (m) {
+    matrix4x4.prototype.conversionConvenience = function () {
         var x,
             y,
             flippedMatrixArray = [];

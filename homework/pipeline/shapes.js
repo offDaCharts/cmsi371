@@ -82,21 +82,85 @@ var Shapes = {
                 [ 1, 5, 6 ],
                 [ 2, 1, 6 ],
                 [ 4, 7, 5 ],
-                [ 7, 6, 5 ]
-                /*[0,1],
-                [1,2],
-                [2,3],
-                [3,0],
-                [0,4],
-                [1,5],
-                [2,6],
-                [3,7],
-                [4,5],
-                [5,6],
-                [6,7],
-                [7,4]*/                
+                [ 7, 6, 5 ]              
             ]
         };
+    },
+
+    /*
+     * Returns the vertices for a cylinder.
+     */
+    cylinder: function () {
+        var verticies,
+            indicies,
+            
+            //Increase these for a better approximation
+            //Decrease for faster rendering
+            verticalSections = 5,
+            horizontalSections = 5,
+            r = 0.5,
+            dVert,
+            y,
+            x,
+            z,
+            
+            //Angles
+            dHor,
+            pitchAngle,
+            yawAngle,
+            xRatios = [],
+            zRatios = [],
+            
+            //Loop variables
+            i,
+            j;
+    
+        //Initialize
+        verticies = [];
+        
+        //Calculate the change in angle for each section
+        dVert = 1/verticalSections;
+        dHor = 2 * Math.PI / horizontalSections;
+        
+        //Find x and z ratios so they don't have to be calculated everytime
+        for(yawAngle = 0; yawAngle < 2 * Math.PI; yawAngle += dHor) {
+            xRatios.push(Math.cos(yawAngle));
+            zRatios.push(-1 * Math.sin(yawAngle));
+        }
+        
+        //Create vertices
+        for(y = -0.5; y <= 0.5; y += dVert) {
+            for(j = 0; j < horizontalSections; j++) {
+                x = r * xRatios[j];
+                z = r * zRatios[j];
+                verticies.push([ x, y, z ]);
+            }
+        }
+
+        //Initialize indicies array
+        indicies = [];
+        
+        //Loop for middle of sphere
+        for (i = 0; i < verticalSections; i++) {
+            for (j = 0; j < horizontalSections; j++) {
+                indicies.push([ 
+                    i * horizontalSections + j,
+                    (i + 1) * horizontalSections + j,
+                    1 + i * horizontalSections + ((j < (horizontalSections - 1)) ? j : -1)
+                ]);
+                indicies.push([ 
+                    1 + i * horizontalSections + ((j < (horizontalSections - 1)) ? j : -1),
+                    (i + 1) * horizontalSections + j,
+                    1 + (i + 1) * horizontalSections + ((j < (horizontalSections - 1)) ? j : -1)
+                ]);
+            }
+        }
+
+        return {
+            vertices: verticies,
+            indices: indicies
+        };
+
     },
 
     /*
@@ -171,6 +235,12 @@ var Shapes = {
             yawAngle,
             xRatios = [],
             zRatios = [],
+            
+            //Coordinates
+            x,
+            y,
+            z,
+            r,
             
             //Loop variables
             i,
