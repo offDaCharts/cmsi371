@@ -263,7 +263,7 @@
     gl.uniformMatrix4fv(projectionMatrix,
         gl.FALSE,
         new Float32Array(
-            frustrum(-2.5, 2.5, -2.5, 2.5, 0.1, 10000).conversionConvenience()
+            frustrum(-2.5, 2.5, -2.5, 2.5, 10, 10000).conversionConvenience()
         )
     );
 
