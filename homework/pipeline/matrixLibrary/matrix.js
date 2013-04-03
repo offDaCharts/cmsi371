@@ -36,7 +36,7 @@ var Matrix4x4 = (function () {
     };
 
     //Matrix for rotating objects
-    Matrix4x4.getRotationMatrix = function (angle, x, y, z) {
+    matrix4x4.getRotationMatrix = function (angle, x, y, z) {
         var axisLength = Math.sqrt((x * x) + (y * y) + (z * z)),
             s = Math.sin(angle * Math.PI / 180.0),
             c = Math.cos(angle * Math.PI / 180.0),
