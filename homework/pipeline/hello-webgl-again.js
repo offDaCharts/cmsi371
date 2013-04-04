@@ -67,8 +67,8 @@
             color: { r: 0.0, g: 0.5, b: 0.0 },
             vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
             mode: gl.TRIANGLES,
-            rotation: [45, 0, 0, 1],
-            translate: [0.5, 0, -3],
+            rotation: [0, 0, 0, 1],
+            translate: [-1, 0, -2],
             scale: [1, 1, 1],
             children: [
                         /*{
@@ -82,7 +82,7 @@
                             vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
                             mode: gl.TRIANGLES,
                             rotation: [0, 0, 0, 1],
-                            translate: [-1, 0, 0],
+                            translate: [0, 0, 0],
                             scale: [1, 1, 1]
                         }
             ]
