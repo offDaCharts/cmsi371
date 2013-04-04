@@ -68,8 +68,8 @@
             vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
             mode: gl.TRIANGLES,
             rotation: [45, 0, 0, 1],
-            translate: [0, 0, 0],
-            scale: [0.5, 0.5, 0.5],
+            translate: [0.5, 0, -3],
+            scale: [1, 1, 1],
             children: [
                         /*{
                             color: { r: 0.0, g: 0.0, b: 0.5 },
@@ -82,23 +82,25 @@
                             vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
                             mode: gl.TRIANGLES,
                             rotation: [0, 0, 0, 1],
-                            translate: [-0.5, 0, 0],
+                            translate: [-1, 0, 0],
                             scale: [1, 1, 1]
                         }
             ]
-        }
+        },
 
-        /*{
+        {
             color: { r: 0.5, g: 0.0, b: 0.0 },
             vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
             mode: gl.TRIANGLES,
             rotation: [0, 0, 0, 1],
+            translate: [0, 0, 0],
+            scale: [1, 1, 1],
             children: [
-                        {
+                        /*{
                             color: { r: 0.0, g: 0.0, b: 0.5 },
                             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
                             mode: gl.TRIANGLES
-                        },
+                        },*/
 
                         {
                             color: { r: 0.5, g: 0.0, b: 0.5 },
@@ -107,7 +109,7 @@
                             rotation: [0, 0, 0, 1]
                         }
             ]
-        }*/
+        }
         
         /*
         {
@@ -219,15 +221,18 @@
     
     //Displays all the objects
     drawArrayOfObjects = function (object, curRotMat, curScaleMat, curTransMat) {
-        for (var i = 0, maxi = object.length; i < maxi; i += 1) {
-        
+        var i,
+                
             //Keep these seperate (instead of one transformation to pass along so
             //that the transformations are always applied in the order: rotate, scale,
             //translate
-            var currentRotationMatrix,
-                currentScaleMatrix,
-                currentTranslationMatrix,
-                totalTransformMatrix;
+            currentRotationMatrix,
+            currentScaleMatrix,
+            currentTranslationMatrix,
+            totalTransformMatrix;
+            
+        for (i = 0, maxi = object.length; i < maxi; i += 1) {
+
                 
             if(object[i].rotation) {
                 currentRotationMatrix = curRotMat.multiplyMatrices(
@@ -316,8 +321,8 @@
     gl.uniformMatrix4fv(projectionMatrix,
         gl.FALSE,
         new Float32Array(
-            //Matrix4x4.frustum(-2.5, 2.5, -2.5, 2.5, 10, 10000).conversionConvenience().elements
-            new Matrix4x4().elements
+            Matrix4x4.frustum(-2.5, 2.5, -2.5, 2.5, 1, 100).conversionConvenience().elements
+            //new Matrix4x4().elements
         )
     );
 
