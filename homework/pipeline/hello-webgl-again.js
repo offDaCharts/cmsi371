@@ -68,7 +68,7 @@
             vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
             mode: gl.TRIANGLES,
             rotation: [0, 0, 0, 1],
-            translate: [-1, 0, -2],
+            translate: [-1, 0, -15],
             scale: [1, 1, 1],
             children: [
                         /*{
@@ -93,7 +93,7 @@
             vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
             mode: gl.TRIANGLES,
             rotation: [0, 0, 0, 1],
-            translate: [2, 0, -2],
+            translate: [2, 0, -15],
             scale: [1, 1, 1],
             children: [
                         /*{
@@ -321,7 +321,7 @@
     gl.uniformMatrix4fv(projectionMatrix,
         gl.FALSE,
         new Float32Array(
-            Matrix4x4.frustum(-2.5, 2.5, -2.5, 2.5, 1, 100).conversionConvenience().elements
+            Matrix4x4.frustum(-2.5, 2.5, -2.5, 2.5, 10, 1000).conversionConvenience().elements
             //new Matrix4x4().elements
         )
     );
