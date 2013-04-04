@@ -231,7 +231,91 @@ var getObjectsToDraw = function(gl) {
     ];
     
     chamber = [
-    
+        {
+            //Chamber
+            color: { r: 0.8, g: 0.8, b: 0.8 },
+            vertices: Shapes.toRawTriangleArray(Shapes.sphere()),
+            mode: gl.TRIANGLES,
+            rotation: [0, 0, 1, 0],
+            translate: [0, 0.3, 0],
+            scale: [0.9, 0.9, 0.9],
+            children: [
+                //View Port
+                {
+                    color: { r: 0.7, g: 0.7, b: 0.7 },
+                    vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
+                    mode: gl.TRIANGLES,
+                    rotation: [90, 1, 0, 0],
+                    translate: [0, 0, 1],
+                    scale: [0.5, 0.5, 0.5],
+                    children: [
+                        {
+                            //Plasma
+                            color: { r: 0.9, g: 0.4, b: 1.0 },
+                            vertices: Shapes.toRawTriangleArray(Shapes.sphere()),
+                            mode: gl.TRIANGLES,
+                            rotation: [0, 0, 1, 0],
+                            translate: [0, 0.2, 0],
+                            scale: [0.22, 0.05, 0.22],
+                            children: []
+                        }
+                    ]
+
+                },
+                //Vacuum meter Port
+                {
+                    color: { r: 0.7, g: 0.7, b: 0.7 },
+                    vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
+                    mode: gl.TRIANGLES,
+                    rotation: [90, 0, 0, 1],
+                    translate: [-1, 0, 0],
+                    scale: [0.5, 0.5, 0.5],
+                    children: []
+
+                },
+                //Feed through Port
+                {
+                    color: { r: 0.7, g: 0.7, b: 0.7 },
+                    vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
+                    mode: gl.TRIANGLES,
+                    rotation: [90, 0, 0, 1],
+                    translate: [1, 0, 0],
+                    scale: [0.5, 0.5, 0.5],
+                    children: []
+
+                },
+                //Back Port
+                {
+                    color: { r: 0.7, g: 0.7, b: 0.7 },
+                    vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
+                    mode: gl.TRIANGLES,
+                    rotation: [90, 1, 0, 0],
+                    translate: [0, 0, -1],
+                    scale: [0.5, 0.5, 0.5],
+                    children: []
+                },
+                {
+                //Top Port
+                    color: { r: 0.7, g: 0.7, b: 0.7 },
+                    vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
+                    mode: gl.TRIANGLES,
+                    rotation: [0, 1, 0, 0],
+                    translate: [0, 1, 0],
+                    scale: [0.7, 0.7, 0.7],
+                    children: []
+                },
+                {
+                //Vacuum Port
+                    color: { r: 0.7, g: 0.7, b: 0.7 },
+                    vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
+                    mode: gl.TRIANGLES,
+                    rotation: [0, 1, 0, 0],
+                    translate: [0, -1, 0],
+                    scale: [0.7, 0.7, 0.7],
+                    children: []
+                }
+            ]
+        }
     ];
     
     // Build the objects to display.    
@@ -249,7 +333,7 @@ var getObjectsToDraw = function(gl) {
                     color: { r: 0.8, g: 0.4, b: 0.4 },
                     vertices: Shapes.toRawTriangleArray(Shapes.cube()),
                     mode: gl.TRIANGLES,
-                    rotation: [20, 1, 0, 0],
+                    rotation: [0, 1, 0, 0],
                     translate: [0, 0, 0],
                     scale: [5, 0.2, 5],
                     children: [
@@ -290,6 +374,26 @@ var getObjectsToDraw = function(gl) {
                             scale: [0.5, 0.5, 0.5]
                         },
                         {
+                        //Power Supply
+                            color: { r: 0.0, g: 0.0, b: 0.0 },
+                            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+                            mode: gl.TRIANGLES,
+                            rotation: [0, 0, 0, 1],
+                            translate: [1.3, 0.45, 1.15],
+                            scale: [2, 0.7, 2.3],
+                            children: [
+                                {
+                                    color: { r: 0.6, g: 0.6, b: 0.6 },
+                                    vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+                                    mode: gl.TRIANGLES,
+                                    rotation: [0, 0, 0, 1],
+                                    translate: [0, 0, 1.12],
+                                    scale: [1.8, 0.6, 0.1],
+                                    children: []
+                                }
+                            ]
+                        },
+                        {
                             color: { r: 0.0, g: 0.0, b: 0.0 },
                             vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
                             mode: gl.TRIANGLES,
@@ -310,7 +414,7 @@ var getObjectsToDraw = function(gl) {
                             vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
                             mode: gl.TRIANGLES,
                             rotation: [0, 0, 0, 1],
-                            translate: [0, 0, 0],
+                            translate: [0, 3.5, 0],
                             children: chamber
                         }
                     ]
