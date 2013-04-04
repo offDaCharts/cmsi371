@@ -4,6 +4,16 @@
  * converting these into "raw" coordinate arrays.
  */
 var Shapes = {
+    
+    //Returns an invisible reference object that be used as a 'root'
+    //For a group of objects so a transform can easily be applied to all
+    nullObject: function() {
+        return {
+            vertices: [],
+            indices: []
+        };
+    },
+    
     /*
      * Returns the vertices for a small icosahedron.
      */

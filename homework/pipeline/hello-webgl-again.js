@@ -64,19 +64,22 @@
     objectsToDraw = [
         
         {
-            color: { r: 0.0, g: 0.5, b: 0.0 },
-            vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
+            color: { r: 0.0, g: 0.0, b: 0.0 },
+            vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
             mode: gl.TRIANGLES,
             rotation: [0, 0, 0, 1],
-            translate: [-1, 0, -15],
+            translate: [0, -2.1, -15],
             scale: [1, 1, 1],
             children: [
-                        /*{
-                            color: { r: 0.0, g: 0.0, b: 0.5 },
+                        {
+                            color: { r: 0.8, g: 0.4, b: 0.4 },
                             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-                            mode: gl.TRIANGLES
-                        },*/
-
+                            mode: gl.TRIANGLES,
+                            rotation: [0, 0, 0, 1],
+                            translate: [0, 0, 0],
+                            scale: [5, 0.2, 5],
+                            children: []
+                        },
                         {
                             color: { r: 0.0, g: 0.0, b: 0.5 },
                             vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
@@ -86,51 +89,7 @@
                             scale: [1, 1, 1]
                         }
             ]
-        },
-
-        {
-            color: { r: 0.5, g: 0.0, b: 0.0 },
-            vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
-            mode: gl.TRIANGLES,
-            rotation: [0, 0, 0, 1],
-            translate: [2, 0, -15],
-            scale: [1, 1, 1],
-            children: [
-                        /*{
-                            color: { r: 0.0, g: 0.0, b: 0.5 },
-                            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-                            mode: gl.TRIANGLES
-                        },*/
-
-                        {
-                            color: { r: 0.5, g: 0.0, b: 0.5 },
-                            vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
-                            mode: gl.TRIANGLES,
-                            rotation: [0, 0, 0, 1],
-                            translate: [-1, 0, 0],
-                            scale: [1, 1, 1]
-                        }
-            ]
         }
-        
-        /*
-        {
-            color: { r: 0.0, g: 0.5, b: 0.0 },
-            vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
-            mode: gl.TRIANGLES,
-            children: [
-                        {
-                            color: { r: 0.0, g: 1, b: 1 },
-                            vertices: Shapes.toRawLineArray(Shapes.sphere()),
-                            mode: gl.LINES
-                        },
-                        {
-                            color: { r: 0.0, g: 1, b: 1 },
-                            vertices: Shapes.toRawLineArray(Shapes.cylinder()),
-                            mode: gl.LINES
-                        }
-            ]
-        }*/
     ];
     
     passVerticesToWebGl = function(objectArray) {
@@ -248,15 +207,13 @@
             }
             
             if(object[i].scale) {
-                currentScaleMatrix = curScaleMat.multiplyMatrices(
-                    Matrix4x4.getScaleMatrix(
-                        object[i].scale[0],
-                        object[i].scale[1],
-                        object[i].scale[2]
-                    )
+                currentScaleMatrix = Matrix4x4.getScaleMatrix(
+                    object[i].scale[0],
+                    object[i].scale[1],
+                    object[i].scale[2]
                 );
             } else {
-                currentScaleMatrix = curScaleMat;
+                currentScaleMatrix = new Matrix4x4();
             }
             
             if(object[i].translate) {
