@@ -327,6 +327,8 @@ var getObjectsToDraw = function(gl) {
             mode: gl.TRIANGLES,
             rotation: [0, 0, 1, 0],
             translate: [0, -3, -18],
+            scale: [1, 1, 1],
+            inheritScale: true,
             children: [
                 {
                     //Base

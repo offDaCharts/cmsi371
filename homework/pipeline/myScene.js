@@ -152,15 +152,15 @@
     };
     
     //Displays all the objects
-    drawArrayOfObjects = function (object, curRotMat, curScaleMat, curTransMat, rotAndTransMat) {
+    drawArrayOfObjects = function (object, curRotMat, curScaleMat, curTransMat, curTotMat) {
         var currentRotationMatrix,
             currentScaleMatrix,
             currentTranslationMatrix,
             rotateAndTranslateMatrix,
-            totalTransformMatrix;
+            totalTransformMatrix,
+            matrixToPassToChildren;
             
         for (var i = 0, maxi = object.length; i < maxi; i += 1) {
-
                 
             if(object[i].rotation) {
                 currentRotationMatrix = Matrix4x4.getRotationMatrix(
@@ -194,7 +194,7 @@
             }
             
             totalTransformMatrix = 
-                rotAndTransMat.multiplyMatrices(
+                curTotMat.multiplyMatrices(
                     currentTranslationMatrix.multiplyMatrices(
                         currentScaleMatrix.multiplyMatrices(
                             currentRotationMatrix
@@ -203,7 +203,7 @@
                 );
                 
             rotateAndTranslateMatrix = 
-                rotAndTransMat.multiplyMatrices(
+                curTotMat.multiplyMatrices(
                     currentTranslationMatrix.multiplyMatrices(
                         currentRotationMatrix
                     )
@@ -227,7 +227,7 @@
                     currentRotationMatrix,
                     currentScaleMatrix,
                     currentTranslationMatrix,
-                    rotateAndTranslateMatrix
+                    (object[i].inheritScale) ? totalTransformMatrix : rotateAndTranslateMatrix
                 );
             }
         }
