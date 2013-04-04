@@ -61,7 +61,8 @@
     gl.viewport(0, 0, canvas.width, canvas.height);
 
     // Build the objects to display.
-    objectsToDraw = [
+    objectsToDraw = getObjectsToDraw(gl);
+    /*objectsToDraw = [
         
         {
             color: { r: 0.0, g: 0.0, b: 0.0 },
@@ -80,7 +81,6 @@
                     translate: [0, 0, 0],
                     scale: [5, 0.2, 5],
                     children: [
-                    
                         {
                         //Wheel
                             color: { r: 0.0, g: 0.0, b: 0.0 },
@@ -116,7 +116,7 @@
                             rotation: [90, 0, 0, 1],
                             translate: [-2.3, -0.3, -2.3],
                             scale: [0.5, 0.5, 0.5]
-                        },
+                        }
                         
                     ]
                 },
@@ -130,7 +130,7 @@
                 }
             ]
         }
-    ];
+    ];*/
     
     passVerticesToWebGl = function(objectArray) {
         // Pass the vertices to WebGL.
