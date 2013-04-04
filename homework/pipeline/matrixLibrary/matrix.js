@@ -95,7 +95,7 @@ var Matrix4x4 = (function () {
             
         for(y = 0; y < 4; y++) {
             for(x = 0; x < 4; x++) {
-                result.elements[y*4+x] = getValueAt(this.elements[0], m.elements[0], x, y);
+                result.elements[y*4+x] = getValueAt(this.elements, m.elements, x, y);
             }
         }
         
