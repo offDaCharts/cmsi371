@@ -29,10 +29,10 @@ var Matrix4x4 = (function () {
     //Matrix for translating objects
     matrix4x4.getTranslateMatrix = function (dx,dy,dz) {
         return new Matrix4x4(
-                1,0,0,0,
-                0,1,0,0,
-                0,0,1,0,
-                dx,dy,dz,1);
+                1,0,0,dx,
+                0,1,0,dy,
+                0,0,1,dz,
+                0,0,0,1);
     };
 
     //Matrix for rotating objects
