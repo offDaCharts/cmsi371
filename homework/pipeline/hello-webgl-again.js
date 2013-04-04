@@ -66,7 +66,9 @@
             color: { r: 0.0, g: 0.5, b: 0.0 },
             vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
             mode: gl.TRIANGLES,
-            rotation: 45,
+            rotation: [0, 0, 0, 1],
+            translate: [0, 0, 0],
+            scale: [1, 1, 1],
             children: [
                         /*{
                             color: { r: 0.0, g: 0.0, b: 0.5 },
@@ -74,35 +76,35 @@
                             mode: gl.TRIANGLES
                         },*/
 
-                        {
+                        /*{
                             color: { r: 0.0, g: 0.0, b: 0.5 },
                             vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
                             mode: gl.TRIANGLES,
-                            rotation: 15
-                        }
+                            rotation: [20, 0, 0, 1]
+                        }*/
             ]
-        },
+        }
 
-        {
+        /*{
             color: { r: 0.5, g: 0.0, b: 0.0 },
             vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
             mode: gl.TRIANGLES,
-            rotation: -45,
+            rotation: [0, 0, 0, 1],
             children: [
-                        /*{
+                        {
                             color: { r: 0.0, g: 0.0, b: 0.5 },
                             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
                             mode: gl.TRIANGLES
-                        },*/
+                        },
 
                         {
                             color: { r: 0.5, g: 0.0, b: 0.5 },
                             vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
                             mode: gl.TRIANGLES,
-                            rotation: -15
+                            rotation: [0, 0, 0, 1]
                         }
             ]
-        }
+        }*/
         
         /*
         {
@@ -212,28 +214,79 @@
     };
     
     //Displays all the objects
-    drawArrayOfObjects = function (object, curRotMat) {
+    drawArrayOfObjects = function (object, curRotMat, curScaleMat, curTransMat) {
         for (var i = 0, maxi = object.length; i < maxi; i += 1) {
-            var currentRotationMatrix;
+        
+            //Keep these seperate (instead of one transformation to pass along so
+            //that the transformations are always applied in the order: rotate, scale,
+            //translate
+            var currentRotationMatrix,
+                currentScaleMatrix,
+                currentTranslationMatrix,
+                totalTransformMatrix;
+                
             if(object[i].rotation) {
                 currentRotationMatrix = curRotMat.multiplyMatrices(
                     Matrix4x4.getRotationMatrix(
-                        object[i].rotation, 0, 0, 1
+                        object[i].rotation[0],
+                        object[i].rotation[1],
+                        object[i].rotation[2],
+                        object[i].rotation[3]
                     )
                 );
-                gl.uniformMatrix4fv(
-                    rotationMatrix, gl.FALSE, 
-                    new Float32Array(
-                        currentRotationMatrix.conversionConvenience().elements
-                    )
-                );                
             } else {
-                currentRotationMatrix = curRotMat.multiplyMatrices(new Matrix4x4());
+                currentRotationMatrix = curRotMat;
             }
+            
+            if(object[i].scale) {
+                currentScaleMatrix = curScaleMat.multiplyMatrices(
+                    Matrix4x4.getScaleMatrix(
+                        object[i].scale[0],
+                        object[i].scale[1],
+                        object[i].scale[2]
+                    )
+                );
+            } else {
+                currentScaleMatrix = curScaleMat;
+            }
+            
+            if(object[i].translate) {
+                currentTranslationMatrix = curTransMat.multiplyMatrices(
+                    Matrix4x4.getTranslateMatrix(
+                        object[i].translate[0],
+                        object[i].translate[1],
+                        object[i].translate[2]
+                    )
+                );
+            } else {
+                currentTranslationMatrix = curTransMat;
+            }
+            
+            totalTransformMatrix = 
+                currentRotationMatrix.multiplyMatrices(
+                    currentScaleMatrix.multiplyMatrices(
+                        currentTranslationMatrix
+                    )
+                );
+            
+            
+            
+            gl.uniformMatrix4fv(
+                rotationMatrix, gl.FALSE, 
+                new Float32Array(
+                    totalTransformMatrix.conversionConvenience().elements
+                )
+            );                
 
             drawObject(object[i]);
+            
             if(object[i].children) {
-                drawArrayOfObjects(object[i].children, currentRotationMatrix);
+                drawArrayOfObjects(
+                    object[i].children,
+                    currentRotationMatrix,
+                    currentScaleMatrix,
+                    currentTranslationMatrix
+                );
             }
         }
     }
@@ -249,7 +302,7 @@
         gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(Matrix4x4.getRotationMatrix(currentRotation, 0, 1, 0).conversionConvenience().elements));
 
         // Display the objects.
-        drawArrayOfObjects(objectsToDraw, new Matrix4x4());
+        drawArrayOfObjects(objectsToDraw, new Matrix4x4(), new Matrix4x4(), new Matrix4x4());
 
         // All done.
         gl.flush();
