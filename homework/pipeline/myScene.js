@@ -62,76 +62,7 @@
 
     // Build the objects to display.
     objectsToDraw = getObjectsToDraw(gl);
-    /*objectsToDraw = [
         
-        {
-            color: { r: 0.0, g: 0.0, b: 0.0 },
-            vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
-            mode: gl.TRIANGLES,
-            rotation: [0, 0, 0, 1],
-            translate: [0, -2.1, -15],
-            scale: [1, 1, 1],
-            children: [
-                {
-                    //Base
-                    color: { r: 0.8, g: 0.4, b: 0.4 },
-                    vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-                    mode: gl.TRIANGLES,
-                    rotation: [0, 0, 1, 0],
-                    translate: [0, 0, 0],
-                    scale: [5, 0.2, 5],
-                    children: [
-                        {
-                        //Wheel
-                            color: { r: 0.0, g: 0.0, b: 0.0 },
-                            vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
-                            mode: gl.TRIANGLES,
-                            rotation: [90, 0, 0, 1],
-                            translate: [-2.3, -0.3, 2.3],
-                            scale: [0.5, 0.5, 0.5]
-                        },
-                        {
-                        //Wheel
-                            color: { r: 0.0, g: 0.0, b: 0.0 },
-                            vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
-                            mode: gl.TRIANGLES,
-                            rotation: [90, 0, 0, 1],
-                            translate: [2.3, -0.3, 2.3],
-                            scale: [0.5, 0.5, 0.5]
-                        },
-                        {
-                        //Wheel
-                            color: { r: 0.0, g: 0.0, b: 0.0 },
-                            vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
-                            mode: gl.TRIANGLES,
-                            rotation: [90, 0, 0, 1],
-                            translate: [2.3, -0.3, -2.3],
-                            scale: [0.5, 0.5, 0.5]
-                        },
-                        {
-                        //Wheel
-                            color: { r: 0.0, g: 0.0, b: 0.0 },
-                            vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
-                            mode: gl.TRIANGLES,
-                            rotation: [90, 0, 0, 1],
-                            translate: [-2.3, -0.3, -2.3],
-                            scale: [0.5, 0.5, 0.5]
-                        }
-                        
-                    ]
-                },
-                {
-                    color: { r: 0.0, g: 0.0, b: 0.5 },
-                    vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
-                    mode: gl.TRIANGLES,
-                    rotation: [0, 0, 0, 1],
-                    translate: [1, 0, 0],
-                    scale: [1, 1, 1]
-                }
-            ]
-        }
-    ];*/
-    
     passVerticesToWebGl = function(objectArray) {
         // Pass the vertices to WebGL.
         /* I have to declare i locally here because otherwise the global i
@@ -310,7 +241,9 @@
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
         // Set up the rotation matrix.
-        gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(Matrix4x4.getRotationMatrix(currentRotation, 0, 1, 0).conversionConvenience().elements));
+        //gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(Matrix4x4.getRotationMatrix(currentRotation, 0, 1, 0).conversionConvenience().elements));
+        gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(Matrix4x4.getRotationMatrix(0, 0, 1, 0).conversionConvenience().elements));
+        objectsToDraw[0].rotation[0] = currentRotation;
 
         // Display the objects.
         drawArrayOfObjects(objectsToDraw, new Matrix4x4(), new Matrix4x4(), new Matrix4x4(), new Matrix4x4());
