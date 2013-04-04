@@ -243,7 +243,8 @@
         // Set up the rotation matrix.
         //gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(Matrix4x4.getRotationMatrix(currentRotation, 0, 1, 0).conversionConvenience().elements));
         gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(Matrix4x4.getRotationMatrix(0, 0, 1, 0).conversionConvenience().elements));
-        objectsToDraw[0].rotation[0] = currentRotation;
+        
+        objectsToDraw[0].rotation = [currentRotation, 0, 1, 0];
 
         // Display the objects.
         drawArrayOfObjects(objectsToDraw, new Matrix4x4(), new Matrix4x4(), new Matrix4x4(), new Matrix4x4());
