@@ -82,7 +82,7 @@
                             vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
                             mode: gl.TRIANGLES,
                             rotation: [0, 0, 0, 1],
-                            translate: [0, 0, 0],
+                            translate: [1, 0, 0],
                             scale: [1, 1, 1]
                         }
             ]
@@ -93,7 +93,7 @@
             vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
             mode: gl.TRIANGLES,
             rotation: [0, 0, 0, 1],
-            translate: [0, 0, 0],
+            translate: [2, 0, -2],
             scale: [1, 1, 1],
             children: [
                         /*{
@@ -106,7 +106,9 @@
                             color: { r: 0.5, g: 0.0, b: 0.5 },
                             vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
                             mode: gl.TRIANGLES,
-                            rotation: [0, 0, 0, 1]
+                            rotation: [0, 0, 0, 1],
+                            translate: [-1, 0, 0],
+                            scale: [1, 1, 1]
                         }
             ]
         }
@@ -221,17 +223,15 @@
     
     //Displays all the objects
     drawArrayOfObjects = function (object, curRotMat, curScaleMat, curTransMat) {
-        var i,
-                
             //Keep these seperate (instead of one transformation to pass along so
             //that the transformations are always applied in the order: rotate, scale,
             //translate
-            currentRotationMatrix,
+        var currentRotationMatrix,
             currentScaleMatrix,
             currentTranslationMatrix,
             totalTransformMatrix;
             
-        for (i = 0, maxi = object.length; i < maxi; i += 1) {
+        for (var i = 0, maxi = object.length; i < maxi; i += 1) {
 
                 
             if(object[i].rotation) {
