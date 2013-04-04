@@ -71,23 +71,63 @@
             translate: [0, -2.1, -15],
             scale: [1, 1, 1],
             children: [
+                {
+                    //Base
+                    color: { r: 0.8, g: 0.4, b: 0.4 },
+                    vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+                    mode: gl.TRIANGLES,
+                    rotation: [0, 0, 1, 0],
+                    translate: [0, 0, 0],
+                    scale: [5, 0.2, 5],
+                    children: [
+                    
                         {
-                            color: { r: 0.8, g: 0.4, b: 0.4 },
-                            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+                        //Wheel
+                            color: { r: 0.0, g: 0.0, b: 0.0 },
+                            vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
                             mode: gl.TRIANGLES,
-                            rotation: [0, 0, 0, 1],
-                            translate: [0, 0, 0],
-                            scale: [5, 0.2, 5],
-                            children: []
+                            rotation: [90, 0, 0, 1],
+                            translate: [-2.3, -0.3, 2.3],
+                            scale: [0.5, 0.5, 0.5]
                         },
                         {
-                            color: { r: 0.0, g: 0.0, b: 0.5 },
-                            vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
+                        //Wheel
+                            color: { r: 0.0, g: 0.0, b: 0.0 },
+                            vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
                             mode: gl.TRIANGLES,
-                            rotation: [0, 0, 0, 1],
-                            translate: [1, 0, 0],
-                            scale: [1, 1, 1]
-                        }
+                            rotation: [90, 0, 0, 1],
+                            translate: [2.3, -0.3, 2.3],
+                            scale: [0.5, 0.5, 0.5]
+                        },
+                        {
+                        //Wheel
+                            color: { r: 0.0, g: 0.0, b: 0.0 },
+                            vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
+                            mode: gl.TRIANGLES,
+                            rotation: [90, 0, 0, 1],
+                            translate: [2.3, -0.3, -2.3],
+                            scale: [0.5, 0.5, 0.5]
+                        },
+                        {
+                        //Wheel
+                            color: { r: 0.0, g: 0.0, b: 0.0 },
+                            vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
+                            mode: gl.TRIANGLES,
+                            rotation: [90, 0, 0, 1],
+                            translate: [-2.3, -0.3, -2.3],
+                            scale: [0.5, 0.5, 0.5]
+                        },
+                        
+                    ]
+                },
+                {
+                    color: { r: 0.0, g: 0.0, b: 0.5 },
+                    vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
+                    mode: gl.TRIANGLES,
+                    rotation: [0, 0, 0, 1],
+                    translate: [1, 0, 0],
+                    scale: [1, 1, 1]
+                }
             ]
         }
     ];
@@ -181,29 +221,25 @@
     };
     
     //Displays all the objects
-    drawArrayOfObjects = function (object, curRotMat, curScaleMat, curTransMat) {
-            //Keep these seperate (instead of one transformation to pass along so
-            //that the transformations are always applied in the order: rotate, scale,
-            //translate
+    drawArrayOfObjects = function (object, curRotMat, curScaleMat, curTransMat, rotAndTransMat) {
         var currentRotationMatrix,
             currentScaleMatrix,
             currentTranslationMatrix,
+            rotateAndTranslateMatrix,
             totalTransformMatrix;
             
         for (var i = 0, maxi = object.length; i < maxi; i += 1) {
 
                 
             if(object[i].rotation) {
-                currentRotationMatrix = curRotMat.multiplyMatrices(
-                    Matrix4x4.getRotationMatrix(
+                currentRotationMatrix = Matrix4x4.getRotationMatrix(
                         object[i].rotation[0],
                         object[i].rotation[1],
                         object[i].rotation[2],
                         object[i].rotation[3]
-                    )
                 );
             } else {
-                currentRotationMatrix = curRotMat;
+                currentRotationMatrix = new Matrix4x4();
             }
             
             if(object[i].scale) {
@@ -217,20 +253,27 @@
             }
             
             if(object[i].translate) {
-                currentTranslationMatrix = curTransMat.multiplyMatrices(
-                    Matrix4x4.getTranslateMatrix(
+                currentTranslationMatrix = Matrix4x4.getTranslateMatrix(
                         object[i].translate[0],
                         object[i].translate[1],
                         object[i].translate[2]
-                    )
                 );
             } else {
-                currentTranslationMatrix = curTransMat;
+                currentTranslationMatrix = new Matrix4x4();
             }
             
             totalTransformMatrix = 
-                currentTranslationMatrix.multiplyMatrices(
-                    currentScaleMatrix.multiplyMatrices(
+                rotAndTransMat.multiplyMatrices(
+                    currentTranslationMatrix.multiplyMatrices(
+                        currentScaleMatrix.multiplyMatrices(
+                            currentRotationMatrix
+                        )
+                    )
+                );
+                
+            rotateAndTranslateMatrix = 
+                rotAndTransMat.multiplyMatrices(
+                    currentTranslationMatrix.multiplyMatrices(
                         currentRotationMatrix
                     )
                 );
@@ -242,7 +285,8 @@
                 new Float32Array(
                     totalTransformMatrix.conversionConvenience().elements
                 )
-            );                
+            );
+                            
 
             drawObject(object[i]);
             
@@ -251,7 +295,8 @@
                     object[i].children,
                     currentRotationMatrix,
                     currentScaleMatrix,
-                    currentTranslationMatrix
+                    currentTranslationMatrix,
+                    rotateAndTranslateMatrix
                 );
             }
         }
@@ -268,7 +313,7 @@
         gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(Matrix4x4.getRotationMatrix(currentRotation, 0, 1, 0).conversionConvenience().elements));
 
         // Display the objects.
-        drawArrayOfObjects(objectsToDraw, new Matrix4x4(), new Matrix4x4(), new Matrix4x4());
+        drawArrayOfObjects(objectsToDraw, new Matrix4x4(), new Matrix4x4(), new Matrix4x4(), new Matrix4x4());
 
         // All done.
         gl.flush();
