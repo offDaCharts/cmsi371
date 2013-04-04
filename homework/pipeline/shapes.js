@@ -96,8 +96,8 @@ var Shapes = {
             
             //Increase these for a better approximation
             //Decrease for faster rendering
-            verticalSections = 5,
-            horizontalSections = 5,
+            verticalSections = 10,
+            horizontalSections = 10,
             r = 0.5,
             dVert,
             y,
@@ -225,8 +225,8 @@ var Shapes = {
             
             //Increase these for a better approximation
             //Decrease for faster rendering
-            verticalSections = 25,
-            horizontalSections = 25,
+            verticalSections = 15,
+            horizontalSections = 15,
             
             //Angles
             dVert,

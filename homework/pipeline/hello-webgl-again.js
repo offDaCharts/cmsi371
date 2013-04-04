@@ -25,9 +25,13 @@
         projectionMatrix,
         vertexPosition,
         vertexColor,
+        
+        //function to set up the draw object function
+        passVerticesToWebGl,
 
         // An individual "draw object" function.
         drawObject,
+        drawObjects,
 
         // The big "draw scene" function.
         drawScene,
@@ -61,58 +65,74 @@
         {
             color: { r: 0.0, g: 0.5, b: 0.5 },
             vertices: Shapes.toRawLineArray(Shapes.icosahedron()),
-            mode: gl.LINES
-        },
-        {
-            color: { r: 0.0, g: 0.0, b: 0.5 },
-            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-            mode: gl.TRIANGLES
+            mode: gl.LINES,
+            children: [
+                        {
+                            color: { r: 0.0, g: 0.0, b: 0.5 },
+                            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+                            mode: gl.TRIANGLES
+                        },
+
+                        {
+                            color: { r: 0.5, g: 0.0, b: 0.0 },
+                            vertices: Shapes.toRawLineArray(Shapes.octahedren()),
+                            mode: gl.LINES
+                        }
+            ]
         },
 
-        {
-            color: { r: 0.5, g: 0.0, b: 0.0 },
-            vertices: Shapes.toRawLineArray(Shapes.octahedren()),
-            mode: gl.LINES
-        },
         {
             color: { r: 0.0, g: 0.5, b: 0.0 },
             vertices: Shapes.toRawTriangleArray(Shapes.pyramid()),
-            mode: gl.TRIANGLES
-        },
-
-        {
-            color: { r: 0.0, g: 1, b: 1 },
-            vertices: Shapes.toRawLineArray(Shapes.sphere()),
-            mode: gl.LINES
-        },
-        {
-            color: { r: 0.0, g: 1, b: 1 },
-            vertices: Shapes.toRawLineArray(Shapes.cylinder()),
-            mode: gl.LINES
+            mode: gl.TRIANGLES,
+            children: [
+                        {
+                            color: { r: 0.0, g: 1, b: 1 },
+                            vertices: Shapes.toRawLineArray(Shapes.sphere()),
+                            mode: gl.LINES
+                        },
+                        {
+                            color: { r: 0.0, g: 1, b: 1 },
+                            vertices: Shapes.toRawLineArray(Shapes.cylinder()),
+                            mode: gl.LINES
+                        }
+            ]
         }
     ];
+    
+    passVerticesToWebGl = function(objectArray) {
+        // Pass the vertices to WebGL.
+        /* I have to declare i locally here because otherwise the global i
+         * will get changed when the function is called recursively and the
+         * loop won't continue
+         */
+        for (var i = 0, maxi = objectArray.length; i < maxi; i += 1) {
+            objectArray[i].buffer = GLSLUtilities.initVertexBuffer(gl,
+                    objectArray[i].vertices);
 
-    // Pass the vertices to WebGL.
-    for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
-        objectsToDraw[i].buffer = GLSLUtilities.initVertexBuffer(gl,
-                objectsToDraw[i].vertices);
-
-        if (!objectsToDraw[i].colors) {
-            // If we have a single color, we expand that into an array
-            // of the same color over and over.
-            objectsToDraw[i].colors = [];
-            for (j = 0, maxj = objectsToDraw[i].vertices.length / 3;
-                    j < maxj; j += 1) {
-                objectsToDraw[i].colors = objectsToDraw[i].colors.concat(
-                    objectsToDraw[i].color.r,
-                    objectsToDraw[i].color.g,
-                    objectsToDraw[i].color.b
-                );
+            if (!objectArray[i].colors) {
+                // If we have a single color, we expand that into an array
+                // of the same color over and over.
+                objectArray[i].colors = [];
+                for (j = 0, maxj = objectArray[i].vertices.length / 3;
+                        j < maxj; j += 1) {
+                    objectArray[i].colors = objectArray[i].colors.concat(
+                        objectArray[i].color.r,
+                        objectArray[i].color.g,
+                        objectArray[i].color.b
+                    );
+                }
+            }
+            objectArray[i].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
+                    objectArray[i].colors);
+                    
+            if(objectArray[i].children) {
+                passVerticesToWebGl(objectArray[i].children);
             }
         }
-        objectsToDraw[i].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
-                objectsToDraw[i].colors);
     }
+    
+    passVerticesToWebGl(objectsToDraw);
 
     // Initialize the shaders.
     shaderProgram = GLSLUtilities.initSimpleShaderProgram(
@@ -166,6 +186,16 @@
         gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
         gl.drawArrays(object.mode, 0, object.vertices.length / 3);
     };
+    
+    //Displays all the objects
+    drawArrayOfObjects = function (object) {
+        for (var i = 0, maxi = object.length; i < maxi; i += 1) {
+            drawObject(object[i]);
+            if(object[i].children) {
+                drawArrayOfObjects(object[i].children);
+            }
+        }
+    }
 
     /*
      * Displays the scene.
@@ -178,9 +208,7 @@
         gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(Matrix4x4.getRotationMatrix(currentRotation, 0, 1, 0).conversionConvenience().elements));
 
         // Display the objects.
-        for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
-            drawObject(objectsToDraw[i]);
-        }
+        drawArrayOfObjects(objectsToDraw);
 
         // All done.
         gl.flush();
@@ -190,7 +218,8 @@
     gl.uniformMatrix4fv(projectionMatrix,
         gl.FALSE,
         new Float32Array(
-            Matrix4x4.frustum(-2.5, 2.5, -2.5, 2.5, 10, 10000).conversionConvenience().elements
+            //Matrix4x4.frustum(-2.5, 2.5, -2.5, 2.5, 10, 10000).conversionConvenience().elements
+            new Matrix4x4().elements
         )
     );
 
