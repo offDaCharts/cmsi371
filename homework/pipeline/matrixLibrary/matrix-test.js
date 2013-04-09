@@ -12,14 +12,17 @@ $(function () {
              0,0,1,0,
              0,0,0,1],
              "initialize identity matrix");
-            
-        deepEqual(m.getScaleMatrix(2, 5, 21).elements,
+
+        // JD: Non-prototype functions should be called from the
+        //     top-level module object.
+        deepEqual(Matrix4x4.getScaleMatrix(2, 5, 21).elements,
             [2,0,0,0,
              0,5,0,0,
              0,0,21,0,
              0,0,0,1],
              "pure scale matrix");
-             
+
+        // JD: Ditto for others...
         deepEqual(m.getTranslateMatrix(4, 5, 6).elements,
             [1,0,0,0,
              0,1,0,0,

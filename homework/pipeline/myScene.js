@@ -69,6 +69,15 @@
          * will get changed when the function is called recursively and the
          * loop won't continue
          */
+        // JD: Yes, you do.  This is a functionally justified change and
+        //     so it is one of those that doesn't need a comment  :)
+        //     (because, as you observed, the code simply does not work
+        //      otherwise)
+        //
+        //     In fact I would also declare j and maxj locally now also,
+        //     even though they are not affected by the recursive call.
+        //     This keeps everything self-contained, and again is justly
+        //     motivated by the way this function is used.
         for (var i = 0, maxi = objectArray.length; i < maxi; i += 1) {
             objectArray[i].buffer = GLSLUtilities.initVertexBuffer(gl,
                     objectArray[i].vertices);
@@ -89,7 +98,7 @@
             objectArray[i].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
                     objectArray[i].colors);
                     
-            if(objectArray[i].children) {
+            if (objectArray[i].children) {
                 passVerticesToWebGl(objectArray[i].children);
             }
         }
@@ -220,8 +229,13 @@
                             
 
             drawObject(object[i]);
-            
-            if(object[i].children) {
+
+            // JD: Nicely done---plus, I don't know if this is in your
+            //     game plan, but it strikes me that "inheritScale" can
+            //     be easily generalized to "inheritTransform."  This way,
+            //     child objects can arbitrarily choose which transforms
+            //     are absolute and which are relative to the parent.
+            if (object[i].children) {
                 drawArrayOfObjects(
                     object[i].children,
                     currentRotationMatrix,
@@ -242,6 +256,7 @@
 
         // Set up the rotation matrix.
         //gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(Matrix4x4.getRotationMatrix(currentRotation, 0, 1, 0).conversionConvenience().elements));
+        // JD: Looks like this can effectively go away now  :)
         gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(Matrix4x4.getRotationMatrix(0, 0, 1, 0).conversionConvenience().elements));
         
         objectsToDraw[0].rotation = [currentRotation, 0, 1, 0];
@@ -254,6 +269,7 @@
     };
 
     // Set up the projection.
+    // JD: Definitely used to good effect here!
     gl.uniformMatrix4fv(projectionMatrix,
         gl.FALSE,
         new Float32Array(
