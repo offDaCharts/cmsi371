@@ -20,7 +20,7 @@
 
         // Important state variables.
         currentRotation = 0.0,
-        currentInterval,
+        isRotating = false,
         rotationMatrix,
         transformMatrix,
         projectionMatrix,
@@ -282,19 +282,16 @@
     drawScene();
 
     // Set up the rotation toggle: clicking on the canvas does it.
-    $(canvas).click(function () {
-        if (currentInterval) {
-            clearInterval(currentInterval);
-            currentInterval = null;
-        } else {
-            currentInterval = setInterval(function () {
-                currentRotation += 1.0;
-                drawScene();
-                if (currentRotation >= 360.0) {
-                    currentRotation -= 360.0;
-                }
-            }, 30);
-        }
+    $(canvas).mousedown(function () {
+        console.log("down");
     });
 
+    $(canvas).mousemove(function () {
+        console.log("move");
+    });
+
+    $(canvas).mouseup(function () {
+        console.log("up");
+    });
+ 
 }(document.getElementById("hello-webgl")));
