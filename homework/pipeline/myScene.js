@@ -18,9 +18,13 @@
         // Utility variable indicating whether some fatal has occurred.
         abort = false,
 
-        // Important state variables.
+        // Event state/model variables.
         currentRotation = 0.0,
+        startingRotation = currentRotation,
         isRotating = false,
+        mouseXStartingPoint,
+
+        // WebGL shader placeholders.
         rotationMatrix,
         transformMatrix,
         projectionMatrix,
@@ -282,13 +286,16 @@
     drawScene();
 
     // Set up the rotation toggle: clicking on the canvas does it.
-    $(canvas).mousedown(function () {
+    $(canvas).mousedown(function (event) {
         isRotating = true;
+        mouseXStartingPoint = event.clientX;
+        startingRotation = currentRotation;
     });
 
-    $(canvas).mousemove(function () {
+    $(canvas).mousemove(function (event) {
         if (isRotating) {
-            console.log("move");
+            currentRotation = startingRotation + (event.clientX - mouseXStartingPoint);
+            drawScene();
         }
     });
 
