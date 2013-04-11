@@ -283,15 +283,17 @@
 
     // Set up the rotation toggle: clicking on the canvas does it.
     $(canvas).mousedown(function () {
-        console.log("down");
+        isRotating = true;
     });
 
     $(canvas).mousemove(function () {
-        console.log("move");
+        if (isRotating) {
+            console.log("move");
+        }
     });
 
     $(canvas).mouseup(function () {
-        console.log("up");
+        isRotating = false;
     });
  
 }(document.getElementById("hello-webgl")));
