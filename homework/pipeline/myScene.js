@@ -19,13 +19,12 @@
         abort = false,
 
         // Event state/model variables.
-        currentRotation = 0.0,
-        startingRotation = currentRotation,
+        currentYRotation = 0.0,
+        startingYRotation = currentYRotation,
         isRotating = false,
         mouseXStartingPoint,
 
         // WebGL shader placeholders.
-        rotationMatrix,
         transformMatrix,
         projectionMatrix,
         vertexPosition,
@@ -144,7 +143,6 @@
     gl.enableVertexAttribArray(vertexPosition);
     vertexColor = gl.getAttribLocation(shaderProgram, "vertexColor");
     gl.enableVertexAttribArray(vertexColor);
-    rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
     transformMatrix = gl.getUniformLocation(shaderProgram, "transformMatrix");
     projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
 
@@ -259,11 +257,7 @@
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
         // Set up the rotation matrix.
-        //gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(Matrix4x4.getRotationMatrix(currentRotation, 0, 1, 0).conversionConvenience().elements));
-        // JD: Looks like this can effectively go away now  :)
-        gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(Matrix4x4.getRotationMatrix(0, 0, 1, 0).conversionConvenience().elements));
-        
-        objectsToDraw[0].rotation = [currentRotation, 0, 1, 0];
+        objectsToDraw[0].rotation = [currentYRotation, 0, 1, 0];
 
         // Display the objects.
         drawArrayOfObjects(objectsToDraw, new Matrix4x4(), new Matrix4x4(), new Matrix4x4(), new Matrix4x4());
@@ -289,12 +283,12 @@
     $(canvas).mousedown(function (event) {
         isRotating = true;
         mouseXStartingPoint = event.clientX;
-        startingRotation = currentRotation;
+        startingYRotation = currentYRotation;
     });
 
     $(canvas).mousemove(function (event) {
         if (isRotating) {
-            currentRotation = startingRotation + (event.clientX - mouseXStartingPoint);
+            currentYRotation = startingYRotation + (event.clientX - mouseXStartingPoint);
             drawScene();
         }
     });
