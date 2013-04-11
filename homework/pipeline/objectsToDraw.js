@@ -325,99 +325,110 @@ var getObjectsToDraw = function(gl) {
             color: { r: 0.0, g: 0.0, b: 0.0 },
             vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
             mode: gl.TRIANGLES,
-            rotation: [0, 0, 1, 0],
+            rotation: [0, 1, 0, 0],
             translate: [0, -3, -18],
             scale: [1, 1, 1],
             inheritScale: true,
             children: [
                 {
-                    //Base
-                    color: { r: 0.8, g: 0.4, b: 0.4 },
-                    vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+                    color: { r: 0.0, g: 0.0, b: 0.0 },
+                    vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
                     mode: gl.TRIANGLES,
-                    rotation: [0, 1, 0, 0],
+                    rotation: [0, 0, 1, 0],
                     translate: [0, 0, 0],
-                    scale: [5, 0.2, 5],
+                    scale: [1, 1, 1],
+                    inheritScale: true,
                     children: [
                         {
-                        //Wheel
-                            color: { r: 0.0, g: 0.0, b: 0.0 },
-                            vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
-                            mode: gl.TRIANGLES,
-                            rotation: [90, 0, 0, 1],
-                            translate: [-2.3, -0.3, 2.3],
-                            scale: [0.5, 0.5, 0.5]
-                        },
-                        {
-                        //Wheel
-                            color: { r: 0.0, g: 0.0, b: 0.0 },
-                            vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
-                            mode: gl.TRIANGLES,
-                            rotation: [90, 0, 0, 1],
-                            translate: [2.3, -0.3, 2.3],
-                            scale: [0.5, 0.5, 0.5]
-                        },
-                        {
-                        //Wheel
-                            color: { r: 0.0, g: 0.0, b: 0.0 },
-                            vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
-                            mode: gl.TRIANGLES,
-                            rotation: [90, 0, 0, 1],
-                            translate: [2.3, -0.3, -2.3],
-                            scale: [0.5, 0.5, 0.5]
-                        },
-                        {
-                        //Wheel
-                            color: { r: 0.0, g: 0.0, b: 0.0 },
-                            vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
-                            mode: gl.TRIANGLES,
-                            rotation: [90, 0, 0, 1],
-                            translate: [-2.3, -0.3, -2.3],
-                            scale: [0.5, 0.5, 0.5]
-                        },
-                        {
-                        //Power Supply
-                            color: { r: 0.0, g: 0.0, b: 0.0 },
+                            //Base
+                            color: { r: 0.8, g: 0.4, b: 0.4 },
                             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
                             mode: gl.TRIANGLES,
-                            rotation: [0, 0, 0, 1],
-                            translate: [1.3, 0.45, 1.15],
-                            scale: [2, 0.7, 2.3],
+                            rotation: [0, 1, 0, 0],
+                            translate: [0, 0, 0],
+                            scale: [5, 0.2, 5],
                             children: [
                                 {
-                                    color: { r: 0.6, g: 0.6, b: 0.6 },
+                                //Wheel
+                                    color: { r: 0.0, g: 0.0, b: 0.0 },
+                                    vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
+                                    mode: gl.TRIANGLES,
+                                    rotation: [90, 0, 0, 1],
+                                    translate: [-2.3, -0.3, 2.3],
+                                    scale: [0.5, 0.5, 0.5]
+                                },
+                                {
+                                //Wheel
+                                    color: { r: 0.0, g: 0.0, b: 0.0 },
+                                    vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
+                                    mode: gl.TRIANGLES,
+                                    rotation: [90, 0, 0, 1],
+                                    translate: [2.3, -0.3, 2.3],
+                                    scale: [0.5, 0.5, 0.5]
+                                },
+                                {
+                                //Wheel
+                                    color: { r: 0.0, g: 0.0, b: 0.0 },
+                                    vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
+                                    mode: gl.TRIANGLES,
+                                    rotation: [90, 0, 0, 1],
+                                    translate: [2.3, -0.3, -2.3],
+                                    scale: [0.5, 0.5, 0.5]
+                                },
+                                {
+                                //Wheel
+                                    color: { r: 0.0, g: 0.0, b: 0.0 },
+                                    vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
+                                    mode: gl.TRIANGLES,
+                                    rotation: [90, 0, 0, 1],
+                                    translate: [-2.3, -0.3, -2.3],
+                                    scale: [0.5, 0.5, 0.5]
+                                },
+                                {
+                                //Power Supply
+                                    color: { r: 0.0, g: 0.0, b: 0.0 },
                                     vertices: Shapes.toRawTriangleArray(Shapes.cube()),
                                     mode: gl.TRIANGLES,
                                     rotation: [0, 0, 0, 1],
-                                    translate: [0, 0, 1.12],
-                                    scale: [1.8, 0.6, 0.1],
-                                    children: []
+                                    translate: [1.3, 0.45, 1.15],
+                                    scale: [2, 0.7, 2.3],
+                                    children: [
+                                        {
+                                            color: { r: 0.6, g: 0.6, b: 0.6 },
+                                            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+                                            mode: gl.TRIANGLES,
+                                            rotation: [0, 0, 0, 1],
+                                            translate: [0, 0, 1.12],
+                                            scale: [1.8, 0.6, 0.1],
+                                            children: []
+                                        }
+                                    ]
+                                },
+                                {
+                                    color: { r: 0.0, g: 0.0, b: 0.0 },
+                                    vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
+                                    mode: gl.TRIANGLES,
+                                    rotation: [0, 0, 0, 1],
+                                    translate: [0, 0, 0],
+                                    children: frame
+                                },
+                                {
+                                    color: { r: 0.0, g: 0.0, b: 0.0 },
+                                    vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
+                                    mode: gl.TRIANGLES,
+                                    rotation: [0, 0, 0, 1],
+                                    translate: [0, 0, 0],
+                                    children: top
+                                },
+                                {
+                                    color: { r: 0.0, g: 0.0, b: 0.0 },
+                                    vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
+                                    mode: gl.TRIANGLES,
+                                    rotation: [0, 0, 0, 1],
+                                    translate: [0, 3.5, 0],
+                                    children: chamber
                                 }
                             ]
-                        },
-                        {
-                            color: { r: 0.0, g: 0.0, b: 0.0 },
-                            vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
-                            mode: gl.TRIANGLES,
-                            rotation: [0, 0, 0, 1],
-                            translate: [0, 0, 0],
-                            children: frame
-                        },
-                        {
-                            color: { r: 0.0, g: 0.0, b: 0.0 },
-                            vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
-                            mode: gl.TRIANGLES,
-                            rotation: [0, 0, 0, 1],
-                            translate: [0, 0, 0],
-                            children: top
-                        },
-                        {
-                            color: { r: 0.0, g: 0.0, b: 0.0 },
-                            vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
-                            mode: gl.TRIANGLES,
-                            rotation: [0, 0, 0, 1],
-                            translate: [0, 3.5, 0],
-                            children: chamber
                         }
                     ]
                 }

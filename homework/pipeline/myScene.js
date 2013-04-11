@@ -19,9 +19,12 @@
         abort = false,
 
         // Event state/model variables.
+        currentXRotation = 0.0,
         currentYRotation = 0.0,
+        startingXRotation = currentXRotation,
         startingYRotation = currentYRotation,
         isRotating = false,
+        mouseYStartingPoint,
         mouseXStartingPoint,
 
         // WebGL shader placeholders.
@@ -257,7 +260,8 @@
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
         // Set up the rotation matrix.
-        objectsToDraw[0].rotation = [currentYRotation, 0, 1, 0];
+        objectsToDraw[0].rotation = [currentXRotation, 1, 0, 0];
+        objectsToDraw[0].children[0].rotation = [currentYRotation, 0, 1, 0];
 
         // Display the objects.
         drawArrayOfObjects(objectsToDraw, new Matrix4x4(), new Matrix4x4(), new Matrix4x4(), new Matrix4x4());
@@ -283,12 +287,15 @@
     $(canvas).mousedown(function (event) {
         isRotating = true;
         mouseXStartingPoint = event.clientX;
+        mouseYStartingPoint = event.clientY;
         startingYRotation = currentYRotation;
+        startingXRotation = currentXRotation;
     });
 
     $(canvas).mousemove(function (event) {
         if (isRotating) {
             currentYRotation = startingYRotation + (event.clientX - mouseXStartingPoint);
+            currentXRotation = startingXRotation + (event.clientY - mouseYStartingPoint);
             drawScene();
         }
     });
