@@ -281,7 +281,29 @@ var getObjectsToDraw = function(gl) {
                     rotation: [90, 0, 0, 1],
                     translate: [1, 0, 0],
                     scale: [0.5, 0.5, 0.5],
-                    children: []
+                    children: [
+                        //cap
+                        {
+                            color: { r: 0.7, g: 0.7, b: 0.7 },
+                            vertices: Shapes.toRawTriangleArray(Shapes.cylinderWithEnds()),
+                            mode: gl.TRIANGLES,
+                            rotation: [0, 0, 0, 1],
+                            translate: [0, -0.3, 0],
+                            scale: [0.7, 0.2, 0.7],
+                            children: [
+                                //cap
+                                {
+                                    color: { r: 0.7, g: 0.7, b: 0.7 },
+                                    vertices: Shapes.toRawTriangleArray(Shapes.cylinderWithEnds()),
+                                    mode: gl.TRIANGLES,
+                                    rotation: [0, 0, 0, 1],
+                                    translate: [0, -0.5, 0],
+                                    scale: [0.1, 1.2, 0.1],
+                                    children: []
+                                }
+                            ]
+                        }
+                    ]
 
                 },
                 //Back Port
@@ -312,7 +334,40 @@ var getObjectsToDraw = function(gl) {
                     rotation: [0, 1, 0, 0],
                     translate: [0, -1, 0],
                     scale: [0.7, 0.7, 0.7],
-                    children: []
+                    children: [
+                        {
+                        //Gate
+                            color: { r: 0.8, g: 0.8, b: 0.8 },
+                            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+                            mode: gl.TRIANGLES,
+                            rotation: [0, 1, 0, 0],
+                            translate: [0.5, -0.5, 0],
+                            scale: [2, 0.3, 1],
+                            children: [
+                                {
+                                //Gate handle
+                                    color: { r: 0.7, g: 0.7, b: 0.7 },
+                                    vertices: Shapes.toRawTriangleArray(Shapes.cylinderWithEnds()),
+                                    mode: gl.TRIANGLES,
+                                    rotation: [0, 1, 0, 0],
+                                    translate: [0.5, 0.1, 0],
+                                    scale: [0.2, 0.5, 0.2],
+                                    children: [
+                                        {
+                                        //Gate handle 2
+                                            color: { r: 0.7, g: 0.7, b: 0.7 },
+                                            vertices: Shapes.toRawTriangleArray(Shapes.cylinderWithEnds()),
+                                            mode: gl.TRIANGLES,
+                                            rotation: [90, 0, 0, 1],
+                                            translate: [0.3, 0.3, 0],
+                                            scale: [0.8, 0.2, 0.2],
+                                            children: []
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         }
@@ -326,7 +381,7 @@ var getObjectsToDraw = function(gl) {
             vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
             mode: gl.TRIANGLES,
             rotation: [0, 1, 0, 0],
-            translate: [0, -3, -18],
+            translate: [0, 0, 0],
             scale: [1, 1, 1],
             inheritScale: true,
             children: [

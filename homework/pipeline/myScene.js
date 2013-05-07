@@ -30,6 +30,7 @@
         // WebGL shader placeholders.
         transformMatrix,
         projectionMatrix,
+        cameraMatrix,
         vertexPosition,
         vertexColor,
         
@@ -148,6 +149,7 @@
     gl.enableVertexAttribArray(vertexColor);
     transformMatrix = gl.getUniformLocation(shaderProgram, "transformMatrix");
     projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
+    cameraMatrix = gl.getUniformLocation(shaderProgram, "cameraMatrix");
 
     /*
      * Displays an individual object.
@@ -275,7 +277,16 @@
     gl.uniformMatrix4fv(projectionMatrix,
         gl.FALSE,
         new Float32Array(
-            Matrix4x4.frustum(-2.5, 2.5, -2.5, 2.5, 10, 1000).conversionConvenience().elements
+            Matrix4x4.frustum(-2.5, 2.5, -2.5, 2.5, 5, 1000).conversionConvenience().elements
+            //new Matrix4x4().elements
+        )
+    );
+    
+    //Set up camera matrix
+    gl.uniformMatrix4fv(cameraMatrix,
+        gl.FALSE,
+        new Float32Array(
+            Matrix4x4.getCameraMatrix(0,3,12,0,3,0,0,1,0).conversionConvenience().elements
             //new Matrix4x4().elements
         )
     );

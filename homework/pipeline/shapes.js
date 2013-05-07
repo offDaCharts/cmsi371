@@ -150,7 +150,7 @@ var Shapes = {
         //Initialize indicies array
         indicies = [];
         
-        //Loop for middle of sphere
+        //Loop for middle
         for (i = 0; i < verticalSections; i++) {
             for (j = 0; j < horizontalSections; j++) {
                 indicies.push([ 
@@ -162,6 +162,94 @@ var Shapes = {
                     1 + i * horizontalSections + ((j < (horizontalSections - 1)) ? j : -1),
                     (i + 1) * horizontalSections + j,
                     1 + (i + 1) * horizontalSections + ((j < (horizontalSections - 1)) ? j : -1)
+                ]);
+            }
+        }
+
+        return {
+            vertices: verticies,
+            indices: indicies
+        };
+
+    },
+    
+    /*
+     * Returns the vertices for a cylinder.
+     */
+    cylinderWithEnds: function () {
+        var verticies,
+            indicies,
+            
+            //Increase these for a better approximation
+            //Decrease for faster rendering
+            verticalSections = 10,
+            horizontalSections = 10,
+            r = 0.5,
+            dVert,
+            y,
+            x,
+            z,
+            
+            //Angles
+            dHor,
+            pitchAngle,
+            yawAngle,
+            xRatios = [],
+            zRatios = [],
+            
+            //Loop variables
+            i,
+            j;
+    
+        //Initialize
+        verticies = [[0, 0.5, 0]];
+        
+        //Calculate the change in angle for each section
+        dVert = 1/verticalSections;
+        dHor = 2 * Math.PI / horizontalSections;
+        
+        //Find x and z ratios so they don't have to be calculated everytime
+        for(yawAngle = 0; yawAngle < 2 * Math.PI; yawAngle += dHor) {
+            xRatios.push(Math.cos(yawAngle));
+            zRatios.push(-1 * Math.sin(yawAngle));
+        }
+        
+        //Create vertices
+        for(y = -0.5; y <= 0.5; y += dVert) {
+            for(j = 0; j < horizontalSections; j++) {
+                x = r * xRatios[j];
+                z = r * zRatios[j];
+                verticies.push([ x, y, z ]);
+            }
+        }
+        
+        verticies.push([0, -0.5, 0]);
+
+        //Initialize indicies array
+        indicies = [];
+        
+        //Loop for top and bottom
+        for(i = 0; i < horizontalSections; i++) {
+            indicies.push([ verticies.length - 1, 1 + i, (2 + ((i < (horizontalSections - 1)) ? i : -1)) ]);
+            indicies.push([ 
+                0, 
+                verticies.length - (2 + horizontalSections - ((i == 0) ? horizontalSections : i)), 
+                verticies.length - (1 + horizontalSections - i)
+            ]);            
+        }
+        
+        //Loop for middle
+        for (i = 0; i < verticalSections; i++) {
+            for (j = 0; j < horizontalSections; j++) {
+                indicies.push([ 
+                    i * horizontalSections + j + 1,
+                    (i + 1) * horizontalSections + j + 1,
+                    2 + i * horizontalSections + ((j < (horizontalSections - 1)) ? j : -1)
+                ]);
+                indicies.push([ 
+                    2 + i * horizontalSections + ((j < (horizontalSections - 1)) ? j : -1),
+                    (i + 1) * horizontalSections + j + 1,
+                    2 + (i + 1) * horizontalSections + ((j < (horizontalSections - 1)) ? j : -1)
                 ]);
             }
         }

@@ -35,6 +35,70 @@ var Matrix4x4 = (function () {
                 0,0,0,1);
     };
 
+    //Matrix for moving camera
+    matrix4x4.getCameraMatrix = function (px,py,pz,qx,qy,qz,ux,uy,uz) {
+        var zex,
+            zey,
+            zez,
+            zmag,
+            
+            zdotu,
+            zmagSquared,
+            zex,
+            zey,
+            zez,
+            projx,
+            projy,
+            projz,
+            
+            yex,
+            yey,
+            yez,
+            ymag,
+            
+            xex,
+            xey,
+            xez;
+            
+        zex = px - qx;
+        zey = py - qy;
+        zez = pz - qz;
+        zmag  = Math.sqrt(zex*zex+zey*zey+zez*zez);
+        
+        zex = zex/zmag;
+        zey = zey/zmag;
+        zez = zez/zmag;
+        
+        //y = up-proj(up,ze)
+        zdotu = zex*ux+zey*uy+zez*uz;
+        zdotz = zex*zex+zey*zey+zez*zez;
+        
+        projx = zdotu/zdotz*zex;
+        projy = zdotu/zdotz*zey;
+        projz = zdotu/zdotz*zez;
+        
+        yex = ux - projx;
+        yey = uy - projy;
+        yez = uz - projz;
+        
+        ymag = Math.sqrt(yex*yex+yey*yey+yez*yez);
+        
+        yex = yex/ymag;
+        yey = yey/ymag;
+        yez = yez/ymag;
+        
+        //y cross z
+        xex = yey*zez-yez*zey;
+        xey = yez*zex-yex*zez;
+        xez = yex*zey-yey*zex;
+        
+        return new Matrix4x4(
+                xex,xey,xez,-1*(px*xex+py*xey+pz*xez),
+                yex,yey,yez,-1*(px*yex+py*yey+pz*yez),
+                zex,zey,zez,-1*(px*zex+py*zey+pz*zez),                
+                0,0,0,1);
+    };
+
     //Matrix for rotating objects
     matrix4x4.getRotationMatrix = function (angle, x, y, z) {
         var axisLength = Math.sqrt((x * x) + (y * y) + (z * z)),
