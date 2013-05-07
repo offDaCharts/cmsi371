@@ -390,7 +390,7 @@ var getObjectsToDraw = function(gl) {
                     vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
                     mode: gl.TRIANGLES,
                     rotation: [0, 0, 1, 0],
-                    translate: [0, 0, 0],
+                    translate: [0, -3, 0],
                     scale: [1, 1, 1],
                     inheritScale: true,
                     children: [

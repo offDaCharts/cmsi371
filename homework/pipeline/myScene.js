@@ -286,7 +286,7 @@
     gl.uniformMatrix4fv(cameraMatrix,
         gl.FALSE,
         new Float32Array(
-            Matrix4x4.getCameraMatrix(0,3,12,0,3,0,0,1,0).conversionConvenience().elements
+            Matrix4x4.getCameraMatrix(0,0,12,0,0,0,0,1,0).conversionConvenience().elements
             //new Matrix4x4().elements
         )
     );
