@@ -9,7 +9,7 @@ var getObjectsToDraw = function(gl) {
             //Vert Beam
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -22,7 +22,7 @@ var getObjectsToDraw = function(gl) {
             //Vert Beam
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -35,7 +35,7 @@ var getObjectsToDraw = function(gl) {
             //Vert Beam
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -48,7 +48,7 @@ var getObjectsToDraw = function(gl) {
             //Vert Beam
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -61,7 +61,7 @@ var getObjectsToDraw = function(gl) {
             //Hor Beam bottom
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -74,7 +74,7 @@ var getObjectsToDraw = function(gl) {
             //Hor Beam bottom
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -87,7 +87,7 @@ var getObjectsToDraw = function(gl) {
             //Hor Beam bottom
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -100,7 +100,7 @@ var getObjectsToDraw = function(gl) {
             //Hor Beam bottom
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -113,7 +113,7 @@ var getObjectsToDraw = function(gl) {
             //Hor Beam mid
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -126,7 +126,7 @@ var getObjectsToDraw = function(gl) {
             //Hor Beam mid
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -139,7 +139,7 @@ var getObjectsToDraw = function(gl) {
             //Hor Beam mid
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -152,7 +152,7 @@ var getObjectsToDraw = function(gl) {
             //Hor Beam mid
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -165,7 +165,7 @@ var getObjectsToDraw = function(gl) {
             //Hor Beam cross
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -178,7 +178,7 @@ var getObjectsToDraw = function(gl) {
             //Hor Beam cross
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -191,7 +191,7 @@ var getObjectsToDraw = function(gl) {
             //Hor Beam cross
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -204,7 +204,7 @@ var getObjectsToDraw = function(gl) {
             //Hor Beam cross
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -217,7 +217,7 @@ var getObjectsToDraw = function(gl) {
             //Hor Beam top
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -230,7 +230,7 @@ var getObjectsToDraw = function(gl) {
             //Hor Beam top
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -243,7 +243,7 @@ var getObjectsToDraw = function(gl) {
             //Hor Beam top
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -256,7 +256,7 @@ var getObjectsToDraw = function(gl) {
             //Hor Beam top
             color: { r: 0.5, g: 0.5, b: 0.5 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 8,
+            shininess: 30,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -272,7 +272,7 @@ var getObjectsToDraw = function(gl) {
             //Top
             color: { r: 1.0, g: 0.6, b: 0.6 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 0,
+            shininess: 1000000,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -285,7 +285,7 @@ var getObjectsToDraw = function(gl) {
             //Top
             color: { r: 1.0, g: 0.6, b: 0.6 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 0,
+            shininess: 1000000,
             normals: Shapes.toNormalArray(Shapes.cube()),
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
             mode: gl.TRIANGLES,
@@ -301,6 +301,7 @@ var getObjectsToDraw = function(gl) {
             //Chamber
             color: { r: 0.8, g: 0.8, b: 0.8 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+            shininess: 16,
             normals: Shapes.toNormalArray(Shapes.sphere()),
             
             vertices: Shapes.toRawTriangleArray(Shapes.sphere()),            
@@ -313,7 +314,7 @@ var getObjectsToDraw = function(gl) {
                 {
                     color: { r: 0.7, g: 0.7, b: 0.7 },
                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                    shininess: 12,
+                    shininess: 20,
                     normals: Shapes.toNormalArray(Shapes.cylinder()),
                     vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
                     mode: gl.TRIANGLES,
@@ -341,7 +342,7 @@ var getObjectsToDraw = function(gl) {
                 {
                     color: { r: 0.7, g: 0.7, b: 0.7 },
                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                    shininess: 12,
+                    shininess: 20,
                     normals: Shapes.toNormalArray(Shapes.cylinder()),
                     vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
                     mode: gl.TRIANGLES,
@@ -355,7 +356,7 @@ var getObjectsToDraw = function(gl) {
                 {
                     color: { r: 0.7, g: 0.7, b: 0.7 },
                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                    shininess: 12,
+                    shininess: 20,
                     normals: Shapes.toNormalArray(Shapes.cylinder()),
                     vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
                     mode: gl.TRIANGLES,
@@ -367,7 +368,7 @@ var getObjectsToDraw = function(gl) {
                         {
                             color: { r: 0.7, g: 0.7, b: 0.7 },
                             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                            shininess: 10,
+                            shininess: 22,
                             normals: Shapes.toNormalArray(Shapes.cylinderWithEnds()),
                             vertices: Shapes.toRawTriangleArray(Shapes.cylinderWithEnds()),
                             mode: gl.TRIANGLES,
@@ -379,7 +380,7 @@ var getObjectsToDraw = function(gl) {
                                 {
                                     color: { r: 0.7, g: 0.7, b: 0.7 },
                                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                                    shininess: 10,
+                                    shininess: 22,
                                     normals: Shapes.toNormalArray(Shapes.cylinderWithEnds()),
                                     vertices: Shapes.toRawTriangleArray(Shapes.cylinderWithEnds()),
                                     mode: gl.TRIANGLES,
@@ -397,7 +398,7 @@ var getObjectsToDraw = function(gl) {
                 {
                     color: { r: 0.7, g: 0.7, b: 0.7 },
                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                    shininess: 12,
+                    shininess: 20,
                     normals: Shapes.toNormalArray(Shapes.cylinder()),
                     vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
                     mode: gl.TRIANGLES,
@@ -410,11 +411,11 @@ var getObjectsToDraw = function(gl) {
                 //Top Port
                     color: { r: 0.7, g: 0.7, b: 0.7 },
                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                    shininess: 12,
+                    shininess: 20,
                     normals: Shapes.toNormalArray(Shapes.cylinder()),
                     vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
                     mode: gl.TRIANGLES,
-                    rotation: [0, 1, 0, 0],
+                    rotation: [180, 0, 1, 0],
                     translate: [0, 1, 0],
                     scale: [0.7, 0.7, 0.7],
                     children: []
@@ -423,7 +424,7 @@ var getObjectsToDraw = function(gl) {
                 //Vacuum Port
                     color: { r: 0.7, g: 0.7, b: 0.7 },
                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                    shininess: 12,
+                    shininess: 20,
                     normals: Shapes.toNormalArray(Shapes.cylinder()),
                     vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
                     mode: gl.TRIANGLES,
@@ -435,7 +436,7 @@ var getObjectsToDraw = function(gl) {
                         //Gate
                             color: { r: 0.8, g: 0.8, b: 0.8 },
                             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                            shininess: 10,
+                            shininess: 22,
                             normals: Shapes.toNormalArray(Shapes.cube()),
                             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
                             mode: gl.TRIANGLES,
@@ -447,7 +448,7 @@ var getObjectsToDraw = function(gl) {
                                 //Gate handle
                                     color: { r: 0.7, g: 0.7, b: 0.7 },
                                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                                    shininess: 10,
+                                    shininess: 22,
                                     normals: Shapes.toNormalArray(Shapes.cylinderWithEnds()),
                                     vertices: Shapes.toRawTriangleArray(Shapes.cylinderWithEnds()),
                                     mode: gl.TRIANGLES,
@@ -459,7 +460,7 @@ var getObjectsToDraw = function(gl) {
                                         //Gate handle 2
                                             color: { r: 0.7, g: 0.7, b: 0.7 },
                                             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                                            shininess: 10,
+                                            shininess: 22,
                                             normals: Shapes.toNormalArray(Shapes.cylinderWithEnds()),
                                             vertices: Shapes.toRawTriangleArray(Shapes.cylinderWithEnds()),
                                             mode: gl.TRIANGLES,
@@ -484,7 +485,7 @@ var getObjectsToDraw = function(gl) {
         {
             color: { r: 0.0, g: 0.0, b: 0.0 },
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 0,
+            shininess: 1000000,
             normals: Shapes.toNormalArray(Shapes.nullObject()),
             vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
             mode: gl.TRIANGLES,
@@ -496,7 +497,7 @@ var getObjectsToDraw = function(gl) {
                 {
                     color: { r: 0.0, g: 0.0, b: 0.0 },
                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                    shininess: 0,
+                    shininess: 1000000,
                     normals: Shapes.toNormalArray(Shapes.nullObject()),
                     vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
                     mode: gl.TRIANGLES,
@@ -509,7 +510,7 @@ var getObjectsToDraw = function(gl) {
                             //Base
                             color: { r: 0.8, g: 0.4, b: 0.4 },
                             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                            shininess: 0,
+                            shininess: 1000000,
                             normals: Shapes.toNormalArray(Shapes.cube()),
                             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
                             mode: gl.TRIANGLES,
@@ -521,7 +522,7 @@ var getObjectsToDraw = function(gl) {
                                 //Wheel
                                     color: { r: 0.0, g: 0.0, b: 0.0 },
                                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                                    shininess: 1,
+                                    shininess: 5000,
                                     normals: Shapes.toNormalArray(Shapes.cylinder()),
                                     vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
                                     mode: gl.TRIANGLES,
@@ -533,7 +534,7 @@ var getObjectsToDraw = function(gl) {
                                 //Wheel
                                     color: { r: 0.0, g: 0.0, b: 0.0 },
                                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                                    shininess: 1,
+                                    shininess: 5000,
                                     normals: Shapes.toNormalArray(Shapes.cylinder()),
                                     vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
                                     mode: gl.TRIANGLES,
@@ -545,7 +546,7 @@ var getObjectsToDraw = function(gl) {
                                 //Wheel
                                     color: { r: 0.0, g: 0.0, b: 0.0 },
                                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                                    shininess: 1,
+                                    shininess: 5000,
                                     normals: Shapes.toNormalArray(Shapes.cylinder()),
                                     vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
                                     mode: gl.TRIANGLES,
@@ -557,7 +558,7 @@ var getObjectsToDraw = function(gl) {
                                 //Wheel
                                     color: { r: 0.0, g: 0.0, b: 0.0 },
                                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                                    shininess: 1,
+                                    shininess: 5000,
                                     normals: Shapes.toNormalArray(Shapes.cylinder()),
                                     vertices: Shapes.toRawTriangleArray(Shapes.cylinder()),
                                     mode: gl.TRIANGLES,
@@ -569,7 +570,7 @@ var getObjectsToDraw = function(gl) {
                                 //Power Supply
                                     color: { r: 0.0, g: 0.0, b: 0.0 },
                                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                                    shininess: 0,
+                                    shininess: 1000000,
                                     normals: Shapes.toNormalArray(Shapes.cube()),
                                     vertices: Shapes.toRawTriangleArray(Shapes.cube()),
                                     mode: gl.TRIANGLES,
@@ -580,7 +581,7 @@ var getObjectsToDraw = function(gl) {
                                         {
                                             color: { r: 0.6, g: 0.6, b: 0.6 },
                                             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                                            shininess: 0,
+                                            shininess: 1000000,
                                             normals: Shapes.toNormalArray(Shapes.cube()),
                                             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
                                             mode: gl.TRIANGLES,
@@ -594,7 +595,7 @@ var getObjectsToDraw = function(gl) {
                                 {
                                     color: { r: 0.0, g: 0.0, b: 0.0 },
                                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                                    shininess: 0,
+                                    shininess: 1000000,
                                     normals: Shapes.toNormalArray(Shapes.nullObject()),
                                     vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
                                     mode: gl.TRIANGLES,
@@ -605,7 +606,7 @@ var getObjectsToDraw = function(gl) {
                                 {
                                     color: { r: 0.0, g: 0.0, b: 0.0 },
                                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                                    shininess: 0,
+                                    shininess: 1000000,
                                     normals: Shapes.toNormalArray(Shapes.nullObject()),
                                     vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
                                     mode: gl.TRIANGLES,
@@ -616,7 +617,7 @@ var getObjectsToDraw = function(gl) {
                                 {
                                     color: { r: 0.0, g: 0.0, b: 0.0 },
                                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                                    shininess: 0,
+                                    shininess: 1000000,
                                     normals: Shapes.toNormalArray(Shapes.nullObject()),
                                     vertices: Shapes.toRawTriangleArray(Shapes.nullObject()),
                                     mode: gl.TRIANGLES,
@@ -654,7 +655,31 @@ var getObjectsToDraw = function(gl) {
             rotation: [0, 0, 1, 0],
             translate: [0, 0.3, 0],
             scale: [0.9, 0.9, 0.9],
-            children: []
+            children: [
+                {
+                    //Chamber
+                    color: { r: 0.8, g: 0.8, b: 0.8 },
+                    
+                    
+                    
+                    // We make the specular reflection be white.
+                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                    shininess: 16,
+                    
+                    
+                    // Like colors, one normal per vertex.  This can be simplified
+                    // with helper functions, of course.
+                    normals: Shapes.toNormalArray(Shapes.sphere()),
+
+                    
+                    vertices: Shapes.toRawTriangleArray(Shapes.sphere()),            
+                    mode: gl.TRIANGLES,
+                    rotation: [0, 0, 1, 0],
+                    translate: [0, 1, 0],
+                    scale: [0.9, 0.9, 0.9],
+                    children: []
+                }
+            ]
         }
     ];
 

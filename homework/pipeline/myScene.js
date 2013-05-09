@@ -34,13 +34,11 @@
         vertexPosition,
         vertexColor,
         
-        
         // For emphasis, we separate the variables that involve lighting.
         normalVector,
         lightPosition,
         lightDiffuse,
         lightSpecular,
-        
         
         //function to set up the draw object function
         passVerticesToWebGl,
@@ -164,8 +162,6 @@
     // Hold on to the important variables within the shaders.
     vertexPosition = gl.getAttribLocation(shaderProgram, "vertexPosition");
     gl.enableVertexAttribArray(vertexPosition);
-    //vertexColor = gl.getAttribLocation(shaderProgram, "vertexColor");
-    //gl.enableVertexAttribArray(vertexColor);
     transformMatrix = gl.getUniformLocation(shaderProgram, "transformMatrix");
     projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
     xRotationMatrix = gl.getUniformLocation(shaderProgram, "xRotationMatrix");
@@ -192,7 +188,6 @@
     drawObject = function (object) {
         // Set the varying colors.
         gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
-        //gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
         gl.vertexAttribPointer(vertexDiffuseColor, 3, gl.FLOAT, false, 0, 0);
 
         gl.bindBuffer(gl.ARRAY_BUFFER, object.specularBuffer);
@@ -327,7 +322,6 @@
     };
 
     // Set up the projection.
-    // JD: Definitely used to good effect here!
     gl.uniformMatrix4fv(projectionMatrix,
         gl.FALSE,
         new Float32Array(
@@ -360,7 +354,7 @@
     );
     
     // Set up our one light source and its colors.
-    gl.uniform4fv(lightPosition, [500.0, 1000.0, 100.0, 1.0]);
+    gl.uniform4fv(lightPosition, [500.0, 500.0, 500.0, 1.0]);
     gl.uniform3fv(lightDiffuse, [1.0, 1.0, 1.0]);
     gl.uniform3fv(lightSpecular, [1.0, 1.0, 1.0]);
 
