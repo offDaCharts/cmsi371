@@ -266,9 +266,6 @@
         // Set up the rotation matrix.
         gl.uniformMatrix4fv(xRotationMatrix, gl.FALSE, new Float32Array(Matrix4x4.getRotationMatrix(currentXRotation, -1, 0, 0).elements));
         gl.uniformMatrix4fv(yRotationMatrix, gl.FALSE, new Float32Array(Matrix4x4.getRotationMatrix(currentYRotation, 0, -1, 0).elements));
-        
-        //objectsToDraw[0].rotation = [currentXRotation, 1, 0, 0];
-        //objectsToDraw[0].children[0].rotation = [currentYRotation, 0, 1, 0];
 
         // Display the objects.
         drawArrayOfObjects(objectsToDraw, new Matrix4x4(), new Matrix4x4(), new Matrix4x4(), new Matrix4x4());
@@ -283,7 +280,6 @@
         gl.FALSE,
         new Float32Array(
             Matrix4x4.frustum(-2.5, 2.5, -2.5, 2.5, 5, 1000).conversionConvenience().elements
-            //new Matrix4x4().elements
         )
     );
     
@@ -292,7 +288,6 @@
         gl.FALSE,
         new Float32Array(
             Matrix4x4.getCameraMatrix(0,0,12,0,0,0,0,1,0).conversionConvenience().elements
-            //new Matrix4x4().elements
         )
     );
     
@@ -301,7 +296,6 @@
         gl.FALSE,
         new Float32Array(
             Matrix4x4.getRotationMatrix(currentXRotation,-1,0,0).conversionConvenience().elements
-            //new Matrix4x4().elements
         )
     );
     
@@ -310,7 +304,6 @@
         gl.FALSE,
         new Float32Array(
             Matrix4x4.getRotationMatrix(currentYRotation,0,-1,0).conversionConvenience().elements
-            //new Matrix4x4().elements
         )
     );
 
