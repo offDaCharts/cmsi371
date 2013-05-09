@@ -50,7 +50,6 @@
             #endif
 
             attribute vec3 vertexPosition;
-            //attribute vec3 vertexColor;
             
             attribute vec3 vertexDiffuseColor;
             attribute vec3 vertexSpecularColor;
@@ -63,10 +62,6 @@
             varying vec3 fragmentLight;
             
             uniform vec4 lightPosition;
-
-            
-            //varying vec4 finalVertexColor;
-            
             uniform mat4 transformMatrix;
             uniform mat4 projectionMatrix;
             uniform mat4 cameraMatrix;
@@ -88,12 +83,9 @@
                 fragmentDiffuseColor = vertexDiffuseColor;
                 fragmentSpecularColor = vertexSpecularColor;
 
-            
-            
                 gl_Position = projectionMatrix * cameraMatrix * 
                             xRotationMatrix * yRotationMatrix * 
                             transformMatrix * vec4(vertexPosition.xy, vertexPosition.z, 1.0);
-                //finalVertexColor = vec4(vertexColor, 1.0);
             }
         </script>
 
@@ -103,17 +95,6 @@
             #ifdef GL_ES
             precision highp float;
             #endif
-
-            //varying vec4 finalVertexColor;
-
-            //void main(void) {
-                // We vary the color based on the fragment's z coordinate,
-                // which, at this point, ranges from 0 (near) to 1 (far).
-                // Note the ".rgb" subselector.
-            //    gl_FragColor = vec4((1.0 - gl_FragCoord.z) * finalVertexColor.rgb, 1.0);
-            //}
-            
-            
             
             varying vec3 fragmentDiffuseColor;
             varying vec3 fragmentSpecularColor;
