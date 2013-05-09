@@ -34,6 +34,14 @@
         vertexPosition,
         vertexColor,
         
+        
+        // For emphasis, we separate the variables that involve lighting.
+        normalVector,
+        lightPosition,
+        lightDiffuse,
+        lightSpecular,
+        
+        
         //function to set up the draw object function
         passVerticesToWebGl,
 
@@ -72,19 +80,9 @@
         
     passVerticesToWebGl = function(objectArray) {
         // Pass the vertices to WebGL.
-        /* I have to declare i locally here because otherwise the global i
-         * will get changed when the function is called recursively and the
-         * loop won't continue
-         */
-        // JD: Yes, you do.  This is a functionally justified change and
-        //     so it is one of those that doesn't need a comment  :)
-        //     (because, as you observed, the code simply does not work
-        //      otherwise)
-        //
-        //     In fact I would also declare j and maxj locally now also,
-        //     even though they are not affected by the recursive call.
-        //     This keeps everything self-contained, and again is justly
-        //     motivated by the way this function is used.
+        var j,
+            maxj;
+        
         for (var i = 0, maxi = objectArray.length; i < maxi; i += 1) {
             objectArray[i].buffer = GLSLUtilities.initVertexBuffer(gl,
                     objectArray[i].vertices);
@@ -104,6 +102,27 @@
             }
             objectArray[i].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
                     objectArray[i].colors);
+            
+            // Same with specular colors.
+            if (!objectArray[i].specularColors) {
+                objectArray[i].specularColors = [];
+                for (j = 0, maxj = objectArray[i].vertices.length / 3;
+                        j < maxj; j += 1) {
+                    objectArray[i].specularColors = objectArray[i].specularColors.concat(
+                        objectArray[i].specularColor.r,
+                        objectArray[i].specularColor.g,
+                        objectArray[i].specularColor.b
+                    );
+                }
+            }
+            objectArray[i].specularBuffer = GLSLUtilities.initVertexBuffer(gl,
+                    objectArray[i].specularColors);
+                    
+            // Buffer for normals.
+            objectArray[i].normalBuffer = GLSLUtilities.initVertexBuffer(gl,
+                    objectArray[i].normals);
+
+
                     
             if (objectArray[i].children) {
                 passVerticesToWebGl(objectArray[i].children);
@@ -145,13 +164,27 @@
     // Hold on to the important variables within the shaders.
     vertexPosition = gl.getAttribLocation(shaderProgram, "vertexPosition");
     gl.enableVertexAttribArray(vertexPosition);
-    vertexColor = gl.getAttribLocation(shaderProgram, "vertexColor");
-    gl.enableVertexAttribArray(vertexColor);
+    //vertexColor = gl.getAttribLocation(shaderProgram, "vertexColor");
+    //gl.enableVertexAttribArray(vertexColor);
     transformMatrix = gl.getUniformLocation(shaderProgram, "transformMatrix");
     projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
     xRotationMatrix = gl.getUniformLocation(shaderProgram, "xRotationMatrix");
     yRotationMatrix = gl.getUniformLocation(shaderProgram, "yRotationMatrix");
     cameraMatrix = gl.getUniformLocation(shaderProgram, "cameraMatrix");
+    
+    vertexDiffuseColor = gl.getAttribLocation(shaderProgram, "vertexDiffuseColor");
+    gl.enableVertexAttribArray(vertexDiffuseColor);
+    vertexSpecularColor = gl.getAttribLocation(shaderProgram, "vertexSpecularColor");
+    gl.enableVertexAttribArray(vertexSpecularColor);
+    normalVector = gl.getAttribLocation(shaderProgram, "normalVector");
+    gl.enableVertexAttribArray(normalVector);
+    
+    // Note the additional variables.
+    lightPosition = gl.getUniformLocation(shaderProgram, "lightPosition");
+    lightDiffuse = gl.getUniformLocation(shaderProgram, "lightDiffuse");
+    lightSpecular = gl.getUniformLocation(shaderProgram, "lightSpecular");
+    shininess = gl.getUniformLocation(shaderProgram, "shininess");
+
 
     /*
      * Displays an individual object.
@@ -159,9 +192,18 @@
     drawObject = function (object) {
         // Set the varying colors.
         gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
-        gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
+        //gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
+        gl.vertexAttribPointer(vertexDiffuseColor, 3, gl.FLOAT, false, 0, 0);
 
+        gl.bindBuffer(gl.ARRAY_BUFFER, object.specularBuffer);
+        gl.vertexAttribPointer(vertexSpecularColor, 3, gl.FLOAT, false, 0, 0);
         
+        // Set the shininess.
+        gl.uniform1f(shininess, object.shininess);
+        
+        // Set the varying normal vectors.
+        gl.bindBuffer(gl.ARRAY_BUFFER, object.normalBuffer);
+        gl.vertexAttribPointer(normalVector, 3, gl.FLOAT, false, 0, 0);
         
         // Set the varying vertex coordinates.
         gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
@@ -264,11 +306,21 @@
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
         // Set up the rotation matrix.
-        gl.uniformMatrix4fv(xRotationMatrix, gl.FALSE, new Float32Array(Matrix4x4.getRotationMatrix(currentXRotation, -1, 0, 0).elements));
-        gl.uniformMatrix4fv(yRotationMatrix, gl.FALSE, new Float32Array(Matrix4x4.getRotationMatrix(currentYRotation, 0, -1, 0).elements));
+        gl.uniformMatrix4fv(xRotationMatrix, gl.FALSE, new Float32Array(
+            Matrix4x4.getRotationMatrix(currentXRotation, -1, 0, 0).elements)
+        );
+        gl.uniformMatrix4fv(yRotationMatrix, gl.FALSE, new Float32Array(
+            Matrix4x4.getRotationMatrix(currentYRotation, 0, -1, 0).elements)
+        );
 
         // Display the objects.
-        drawArrayOfObjects(objectsToDraw, new Matrix4x4(), new Matrix4x4(), new Matrix4x4(), new Matrix4x4());
+        drawArrayOfObjects(
+            objectsToDraw, 
+            new Matrix4x4(), 
+            new Matrix4x4(), 
+            new Matrix4x4(), 
+            new Matrix4x4()
+        );
 
         // All done.
         gl.flush();
@@ -306,6 +358,12 @@
             Matrix4x4.getRotationMatrix(currentYRotation,0,-1,0).conversionConvenience().elements
         )
     );
+    
+    // Set up our one light source and its colors.
+    gl.uniform4fv(lightPosition, [500.0, 1000.0, 100.0, 1.0]);
+    gl.uniform3fv(lightDiffuse, [1.0, 1.0, 1.0]);
+    gl.uniform3fv(lightSpecular, [1.0, 1.0, 1.0]);
+
 
     // Draw the initial scene.
     drawScene();

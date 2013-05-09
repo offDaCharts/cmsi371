@@ -234,7 +234,20 @@ var getObjectsToDraw = function(gl) {
         {
             //Chamber
             color: { r: 0.8, g: 0.8, b: 0.8 },
-            vertices: Shapes.toRawTriangleArray(Shapes.sphere()),
+            
+            
+            
+            // We make the specular reflection be white.
+            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+            shininess: 16,
+            
+            
+            // Like colors, one normal per vertex.  This can be simplified
+            // with helper functions, of course.
+            normals: Shapes.toNormalArray(Shapes.sphere()),
+
+            
+            vertices: Shapes.toRawTriangleArray(Shapes.sphere()),            
             mode: gl.TRIANGLES,
             rotation: [0, 0, 1, 0],
             translate: [0, 0.3, 0],
@@ -490,8 +503,35 @@ var getObjectsToDraw = function(gl) {
             ]
         }
     ];
+    
+    var testLight = [
+        {
+            //Chamber
+            color: { r: 0.8, g: 0.8, b: 0.8 },
+            
+            
+            
+            // We make the specular reflection be white.
+            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+            shininess: 16,
+            
+            
+            // Like colors, one normal per vertex.  This can be simplified
+            // with helper functions, of course.
+            normals: Shapes.toNormalArray(Shapes.sphere()),
 
-    return objectsToDraw;
+            
+            vertices: Shapes.toRawTriangleArray(Shapes.sphere()),            
+            mode: gl.TRIANGLES,
+            rotation: [0, 0, 1, 0],
+            translate: [0, 0.3, 0],
+            scale: [0.9, 0.9, 0.9],
+            children: []
+        }
+    ];
+
+    //return objectsToDraw;
+    return testLight;
 }
 
     
