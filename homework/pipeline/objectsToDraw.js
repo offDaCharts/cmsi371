@@ -2,7 +2,24 @@ var getObjectsToDraw = function(gl) {
     var objectsToDraw,
         frame,
         top,
-        chamber;
+        chamber,
+        plasma;
+                
+    plasma = [
+        {
+            //Plasma
+            color: { r: 0.9, g: 0.4, b: 1.0 },
+            specularColor: { r: 1.0, g: 0.6, b: 1.0 },
+            shininess: 16,
+            normals: Shapes.toNormalArray(Shapes.sphere()),
+            vertices: Shapes.toRawTriangleArray(Shapes.sphere()),
+            mode: gl.TRIANGLES,
+            rotation: [0, 0, 1, 0],
+            translate: [0, 0.2, 0],
+            scale: [0,0,0],
+            children: []
+        }
+    ];    
         
     frame = [
         {
@@ -321,21 +338,7 @@ var getObjectsToDraw = function(gl) {
                     rotation: [90, 1, 0, 0],
                     translate: [0, 0, 1],
                     scale: [0.5, 0.5, 0.5],
-                    children: [
-                        {
-                            //Plasma
-                            color: { r: 0.9, g: 0.4, b: 1.0 },
-                            specularColor: { r: 1.0, g: 0.6, b: 1.0 },
-                            shininess: 16,
-                            normals: Shapes.toNormalArray(Shapes.sphere()),
-                            vertices: Shapes.toRawTriangleArray(Shapes.sphere()),
-                            mode: gl.TRIANGLES,
-                            rotation: [0, 0, 1, 0],
-                            translate: [0, 0.2, 0],
-                            scale: [0.22, 0.05, 0.22],
-                            children: []
-                        }
-                    ]
+                    children: plasma
 
                 },
                 //Vacuum meter Port

@@ -49,6 +49,7 @@
 
         // The big "draw scene" function.
         drawScene,
+        currentFrame = 0,
 
         // Reusable loop variables.
         i,
@@ -381,6 +382,25 @@
 
     $(canvas).mouseup(function () {
         isRotating = false;
+    });
+
+    $("#startFusion").click(function() {
+        setInterval(function() {
+            var size = currentFrame * 0.05;
+            
+            //Change the plasma size
+            objectsToDraw[0]
+                .children[0]
+                .children[0]
+                .children[7]
+                .children[0]
+                .children[0]
+                .children[0].scale = [size*0.22, size*0.05, size*0.22];
+            
+            passVerticesToWebGl(objectsToDraw);
+            drawScene();
+            currentFrame = (currentFrame > 20) ? 20 : currentFrame + 1;
+        }, 100);
     });
  
 }(document.getElementById("hello-webgl")));

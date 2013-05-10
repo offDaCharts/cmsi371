@@ -323,8 +323,8 @@ var Shapes = {
             
             //Increase these for a better approximation
             //Decrease for faster rendering
-            verticalSections = 15,
-            horizontalSections = 15,
+            verticalSections = 10,
+            horizontalSections = 10,
             
             //Angles
             dVert,
