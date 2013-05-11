@@ -388,7 +388,13 @@
         setInterval(function() {
             var size = currentFrame * 0.05;
             
-            //Change the plasma size
+            // Change the plasma size
+            // JD: For something *this* specific, you should pre-store the
+            //     object in a variable (say, fusionEffect) so that the code
+            //     below would only have to read:
+            //
+            //     fusionEffect.scale = [size*0.22, size*0.05, size*0.22];
+            //
             objectsToDraw[0]
                 .children[0]
                 .children[0]

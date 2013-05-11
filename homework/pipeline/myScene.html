@@ -71,8 +71,12 @@
 
             void main(void) {
                 //Relay to fragment shader
-                fragmentNormal = normalVector;
-                fragmentEye = vertexPosition;
+                // JD: I made the light appear stationary---hope you don't
+                //     mind.  You can change it back if you prefer it the
+                //     other way.
+                mat4 instanceMatrix = xRotationMatrix * yRotationMatrix * transformMatrix;
+                fragmentNormal = (instanceMatrix * vec4(normalVector, 0.0)).xyz;
+                fragmentEye = (instanceMatrix * vec4(vertexPosition, 1.0)).xyz;
                 fragmentLight = lightPosition.xyz;
 
                 if (lightPosition.w != 0.0) {
@@ -84,9 +88,10 @@
                 fragmentDiffuseColor = vertexDiffuseColor;
                 fragmentSpecularColor = vertexSpecularColor;
 
+                // JD: We already computed the instance matrix, so we reuse
+                //     it here.
                 gl_Position = projectionMatrix * cameraMatrix * 
-                            xRotationMatrix * yRotationMatrix * 
-                            transformMatrix * vec4(vertexPosition.xy, vertexPosition.z, 1.0);
+                    instanceMatrix * vec4(vertexPosition, 1.0);
             }
         </script>
 
